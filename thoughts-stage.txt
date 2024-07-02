@@ -1,0 +1,8 @@
+key words: annuaire d'agence ergonomic ,micro service , exposition api, getTheirPLaces,could work with the google api , user management (most likely would use key cloak for that) , interface administrateur, 
+
+Proposed micro services: 
+-Agence Management: for managing crud simple meta data 
+-Agence location management : for managing just the location of agencys, could merge it with agence management as ill Always need to manage them both but différences  between tecknological uses and ubextruious langugae might justify this subdivision. 
+-user management: could be replaced with a key cloack service, but might include a live tracking feature , considering subdivinding this feature into its own micro service. 
+
+                                 
