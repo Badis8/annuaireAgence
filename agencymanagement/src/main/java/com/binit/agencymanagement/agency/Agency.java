@@ -1,10 +1,9 @@
 package com.binit.agencymanagement.agency;
 
 import java.util.Objects;
-
 import com.binit.agencymanagement.agency.manager.Manager;
 import com.binit.agencymanagement.agency.utility.TimeInterval;
-
+import com.binit.agencymanagement.agency.Agency;
 public class Agency {
 
     private String name;

@@ -13,6 +13,10 @@ public class TimeInterval {
         this.from = from;
         this.to = to;
     }
+    
+    public TimeInterval( ) {
+    
+    }
 
     public LocalTime getFrom() {
         return from;
