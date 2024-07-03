@@ -8,14 +8,15 @@ import jakarta.ws.rs.Path;
 import java.util.List;
 
 import com.binit.agencymanagement.agency.Agency;
+import com.binit.agencymanagement.dto.AgencyRequest;
 import com.binit.agencymanagement.service.AgencyService;
 
 @Path("/agency")
-public class agencyRessources {
+public class AgencyRessources {
     @Inject AgencyService agencyService;
     @POST
     @Path("/addAgency")
-    public void addAgency(Agency agency){
+    public void addAgency(AgencyRequest agency){
         agencyService.addAgency(agency);
     }
     @GET

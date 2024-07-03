@@ -1,4 +1,4 @@
-package com.binit.agencymanagement.repository;
+package com.binit.agencymanagement.repository.repositoryimplementation;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.binit.agencymanagement.agency.Agency;
+import com.binit.agencymanagement.repository.AgencyRepository;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 @ApplicationScoped

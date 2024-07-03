@@ -1,4 +1,4 @@
-package com.binit.agencymanagement.repository.codec;
+package com.binit.agencymanagement.repository.repositoryimplementation.codec;
 import com.binit.agencymanagement.agency.Agency;
 import org.bson.codecs.Codec;
 import org.bson.codecs.configuration.CodecProvider;
