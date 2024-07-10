@@ -11,5 +11,6 @@ public interface AgencyRepository {
 
     public List<Agency> list();
 
+    public void removeAll();
    
 }

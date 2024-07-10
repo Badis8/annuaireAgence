@@ -3,6 +3,7 @@ package com.binit.agencymanagement.repository.repositoryimplementation;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +35,9 @@ public class AgencyRepositoryImplementation implements AgencyRepository {
     }
     private MongoCollection<Agency> getCollection(){
         return mongoClient.getDatabase("Agency").getCollection("Agency", Agency.class);
+    }
+    @Override
+    public void removeAll() {
+        mongoClient.getDatabase("Agency").getCollection("Agency").deleteMany(Filters.empty());
     }
 }

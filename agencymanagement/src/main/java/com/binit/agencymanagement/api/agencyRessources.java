@@ -1,6 +1,7 @@
 package com.binit.agencymanagement.api;
 
 import jakarta.inject.Inject;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -23,5 +24,10 @@ public class AgencyRessources {
     @Path("/listAgencys")
     public List<Agency> listAgency(){
          return  agencyService.listAgency();
+    }
+    @DELETE
+    @Path("/deleteAll")
+    public void deleteAll(){
+            agencyService.deleteAll();
     }
 }

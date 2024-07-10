@@ -28,5 +28,10 @@ public class AgencyServiceImplementation implements AgencyService {
     public List<Agency> listAgency() {
         return agencyRepository.list();
     }
+
+    @Override
+    public void deleteAll() {
+       this.agencyRepository.removeAll();
+    }
     
 }

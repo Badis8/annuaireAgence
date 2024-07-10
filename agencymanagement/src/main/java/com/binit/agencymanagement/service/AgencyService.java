@@ -9,5 +9,7 @@ public interface AgencyService {
 
         public List<Agency> listAgency() ; 
 
+        public void deleteAll();
+
 
 }

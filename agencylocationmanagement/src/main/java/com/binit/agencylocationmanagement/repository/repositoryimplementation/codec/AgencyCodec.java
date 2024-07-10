@@ -60,8 +60,19 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
         Document document = documentCodec.decode(reader, decoderContext);
         Agency agency = new Agency();
         agency.setAgencyID(document.getString("agencyID"));
-        agency.setLatitude(document.getDouble("latitude"));
-        agency.setLongitude(document.getDouble("longitude"));
+        if (document.containsKey("latitude")) {
+            Double latitude = document.getDouble("latitude");
+            agency.setLatitude(latitude);
+        } else {
+            agency.setLatitude(0);  
+        }
+    
+        if (document.containsKey("longitude")) {
+            Double longitude = document.getDouble("longitude");
+            agency.setLongitude(longitude);
+        } else {          
+            agency.setLongitude(0);  
+        }
         
         return agency;
     }

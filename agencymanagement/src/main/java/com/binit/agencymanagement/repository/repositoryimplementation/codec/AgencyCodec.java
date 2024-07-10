@@ -2,7 +2,7 @@ package com.binit.agencymanagement.repository.repositoryimplementation.codec;
 
 import com.binit.agencymanagement.agency.Agency;
 import com.binit.agencymanagement.agency.manager.Manager;
-import com.binit.agencymanagement.agency.utility.TimeInterval;
+import com.binit.agencymanagement.agency.utility.WorkingHours;
 import com.mongodb.MongoClientSettings;
 import org.bson.*;
 import org.bson.codecs.CollectibleCodec;
@@ -24,8 +24,9 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
     public void encode(BsonWriter writer, Agency agency, EncoderContext encoderContext) {
         Document doc = new Document();
         doc.put("name", agency.getName());
+        doc.put("address", agency.getAddress());
         doc.put("workingHours", agency.getWorkingHours() != null ? agency.getWorkingHours().toString() : null);  
-        doc.put("type", agency.getType());
+        doc.put("zone", agency.getZone());
         doc.put("id", agency.getId());
         doc.put("manager", agency.getmanager() != null ? agency.getmanager().toString() : null);  
         documentCodec.encode(writer, doc, encoderContext);
@@ -60,12 +61,12 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
         Agency agency = new Agency();
         agency.setId(document.getString("id"));
         agency.setName(document.getString("name"));
-        agency.setDescription(document.getString("description"));
-        agency.setType(document.getString("type"));
+        agency.setAddress(document.getString("address"));
+        agency.setZone(document.getString("zone"));
 
  
         if (document.getString("workingHours") != null) {
-            agency.setWorkingHours(TimeInterval.fromString(document.getString("workingHours")));
+            agency.setWorkingHours(WorkingHours.fromString(document.getString("workingHours")));
         }
 
         if (document.getString("manager") != null) {

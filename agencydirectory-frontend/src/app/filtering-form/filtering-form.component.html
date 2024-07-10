@@ -1,0 +1,25 @@
+<form [formGroup]="applyForm" (ngSubmit)="submitApplication()" class="agency-form">
+  
+    <div class="form-group">
+        <label for="manager">Manager</label>
+        <input type="text" id="manager" formControlName="manager" class="form-control" placeholder="Enter manager">
+    </div>
+    <div class="form-group">
+        <label for="zone">Zone</label>
+        <input type="text" id="zone" formControlName="zone" class="form-control" placeholder="Enter zone">
+    </div>
+  
+    <div class="form-group flex-container">
+       
+        <button type="submit" class="btn btn-primary">Submit</button>  
+        <div class="switch-container">
+            <label class="switch">
+                <input type="checkbox" formControlName="isOpen">
+                <span class="slider round"></span>
+            </label>
+            <span class="switch-label" [ngClass]="{'open': applyForm.get('isOpen')?.value, 'closed': !applyForm.get('isOpen')?.value}">
+                {{ applyForm.get('isOpen')?.value ? 'Open' : 'Closed' }}
+            </span>
+        </div>
+    </div>
+</form>

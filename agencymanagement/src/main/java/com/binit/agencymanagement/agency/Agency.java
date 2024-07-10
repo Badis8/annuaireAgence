@@ -2,27 +2,27 @@ package com.binit.agencymanagement.agency;
 
 import java.util.Objects;
 import com.binit.agencymanagement.agency.manager.Manager;
-import com.binit.agencymanagement.agency.utility.TimeInterval;
+import com.binit.agencymanagement.agency.utility.WorkingHours;
 import com.binit.agencymanagement.agency.Agency;
 public class Agency {
 
     private String name;
-    private TimeInterval workingHours;
-    private String type;
+    private WorkingHours workingHours;
+    private String zone;
     private String id;
     private Manager manager;
-    private String description;
+    private String address;
 
     public Agency() {
     }
 
-    public Agency(String name, TimeInterval workingHours, String type, String id, Manager manager,String description) {
+    public Agency(String name, WorkingHours workingHours, String type, String id, Manager manager,String description) {
         this.name = name;
         this.workingHours = workingHours;
-        this.type = type;
+        this.zone = type;
         this.id = id;
         this.manager = manager;
-        this.description=description;
+        this.address=description;
     }
 
     public String getName() {
@@ -33,27 +33,27 @@ public class Agency {
         this.name = name;
     }
 
-    public TimeInterval getWorkingHours() {
+    public WorkingHours getWorkingHours() {
         return workingHours;
     }
 
-    public void setWorkingHours(TimeInterval workingHours) {
+    public void setWorkingHours(WorkingHours workingHours) {
         this.workingHours = workingHours;
     }
 
-    public String getType() {
-        return type;
+    public String getZone() {
+        return zone;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setZone(String zone) {
+        this.zone = zone;
     }
-    public String getDescription() {
-        return description;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getId() {
