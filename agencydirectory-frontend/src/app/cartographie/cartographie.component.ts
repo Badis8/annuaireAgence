@@ -5,7 +5,8 @@ import '@maptiler/sdk/dist/maptiler-sdk.css';
 import { AgencyLocationManagementService } from '../agency-location-management.service';
 import { AgencyLocation } from '../agency-location';
 import { MapServiceImplementation } from './services/MapServiceImplementation';
-import { AgencyListComponent } from '../agency-list/agency-list.component';
+import { AgencyListComponent } from '../agency-list/agency-list.component'; 
+import {MapServiceLeafletImplementation} from './services/MapServiceLeafletImplementation'
 @Component({
   selector: 'app-cartographie',
   standalone: true,
@@ -14,7 +15,7 @@ import { AgencyListComponent } from '../agency-list/agency-list.component';
   styleUrls: ['./cartographie.component.css'],
   providers: [MapServiceImplementation]
 }) 
-export class CartographieComponent implements OnDestroy {
+export class CartographieComponent implements OnDestroy ,AfterViewInit{
   map: Map | undefined;
   agencyService: AgencyLocationManagementService = inject(AgencyLocationManagementService);
   mapPresenter: MapPresenter = inject(MapServiceImplementation);
@@ -28,18 +29,17 @@ export class CartographieComponent implements OnDestroy {
   }
 
    constructor(){
- 
-    afterNextRender(() => {
-      this.agencyService.getRemoteAgencysLocations().then((agenciesLocations: AgencyLocation[]) => {
+    
+}
+  ngAfterViewInit(): void {
+   
+    this.agencyService.getRemoteAgencysLocations().then((agenciesLocations: AgencyLocation[]) => {
       this.locations = agenciesLocations;
       this.map = this.mapPresenter.initMap(this.locations,this.mapContainer);
-      this.mapPresenter.pinPointMarkers(this.map,  this.locations )
-     
-   }); 
-     
-  });
+      this.mapPresenter.pinPointMarkers(this.map,  this.locations )  
+    });
+  } 
  
-}
   ngOnDestroy() {
     this.map?.remove();
    
