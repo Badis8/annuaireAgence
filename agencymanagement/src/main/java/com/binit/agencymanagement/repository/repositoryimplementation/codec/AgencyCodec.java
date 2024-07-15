@@ -23,7 +23,6 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
     @Override
     public void encode(BsonWriter writer, Agency agency, EncoderContext encoderContext) {
         Document doc = new Document();
-        doc.put("name", agency.getName());
         doc.put("address", agency.getAddress());
         doc.put("workingHours", agency.getWorkingHours() != null ? agency.getWorkingHours().toString() : null);  
         doc.put("zone", agency.getZone());
@@ -60,7 +59,6 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
         Document document = documentCodec.decode(reader, decoderContext);
         Agency agency = new Agency();
         agency.setId(document.getString("id"));
-        agency.setName(document.getString("name"));
         agency.setAddress(document.getString("address"));
         agency.setZone(document.getString("zone"));
 

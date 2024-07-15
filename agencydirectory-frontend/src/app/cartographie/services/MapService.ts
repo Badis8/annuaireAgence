@@ -8,4 +8,6 @@ export interface MapPresenter {
 
     initialPosition(markers:AgencyLocation[]):[number, number] 
 
+    zoomToLocation(map: any, latitude: number, longitude: number, zoomLevel: number  ): void 
+
   }

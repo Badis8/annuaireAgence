@@ -6,9 +6,9 @@ import com.binit.agencymanagement.agency.utility.WorkingHours;
 
 public class AgencyRequest {
 
-    private String name;
+    private String zone;
     private WorkingHours workingHours;
-    private String type;
+    private String address;
     private String id;
     private Manager manager;
     private String description;
@@ -18,10 +18,10 @@ public class AgencyRequest {
     public AgencyRequest() {
     }
 
-    public AgencyRequest(String name, WorkingHours workingHours, String type, String id, Manager manager, String description, double latitude, double longitude) {
-        this.name = name;
+    public AgencyRequest(String zone, WorkingHours workingHours, String address, String id, Manager manager, String description, double latitude, double longitude) {
+        this.zone = zone;
         this.workingHours = workingHours;
-        this.type = type;
+        this.address = address;
         this.id = id;
         this.manager = manager;
         this.description = description;
@@ -29,12 +29,12 @@ public class AgencyRequest {
         this.longitude = longitude;
     }
 
-    public String getName() {
-        return name;
+    public String getzone() {
+        return zone;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setzone(String zone) {
+        this.zone = zone;
     }
 
     public WorkingHours getWorkingHours() {
@@ -45,12 +45,12 @@ public class AgencyRequest {
         this.workingHours = workingHours;
     }
 
-    public String getType() {
-        return type;
+    public String getaddress() {
+        return address;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setaddress(String address) {
+        this.address = address;
     }
 
     public String getDescription() {

@@ -1,7 +1,8 @@
  <div class="agency-list">
     <app-single-agency
-      *ngFor="let agency of agencies"
+      *ngFor="let agency of agencyService.filteredAgencies"
       [agency]="agency"
+      (agencyClicked)="onAgencyClicked($event)" 
     ></app-single-agency>
 </div>
  

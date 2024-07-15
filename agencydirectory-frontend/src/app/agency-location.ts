@@ -1,5 +1,5 @@
 export interface AgencyLocation {
-    id:string;
+    agencyID:string;
     latitude:number;
     longitude:number; 
 }

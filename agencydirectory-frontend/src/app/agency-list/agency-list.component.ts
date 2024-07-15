@@ -1,4 +1,4 @@
-import { Component ,inject} from '@angular/core';
+import { Component ,EventEmitter,Output,inject} from '@angular/core';
 import { Agency } from '../agency';
 import {SingleAgencyComponent} from '../single-agency/single-agency.component'; 
 import { CommonModule } from '@angular/common';
@@ -12,12 +12,17 @@ import { AgencyManagementService} from '../agency-management.service';
 })
 export class AgencyListComponent {
   agencies: Agency[] = [];
+  @Output() agencyClickedInParent = new EventEmitter<string>();
   agencyService: AgencyManagementService = inject(AgencyManagementService);
   constructor() {
     this.agencyService.getRemoteAgencys().then((agencies: Agency[]) => {
       this.agencies = agencies;
+      
 
     });
    
+  }
+  onAgencyClicked(agencyId: string): void {
+    this.agencyClickedInParent.emit(agencyId);
   }
 }

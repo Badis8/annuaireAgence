@@ -19,7 +19,7 @@ public class AgencyServiceImplementation implements AgencyService {
     @Override
     public void addAgency(AgencyRequest agencyRequest ) {
 
-        agencyRepository.add(new Agency(agencyRequest.getName(),agencyRequest.getWorkingHours(),agencyRequest.getType(),agencyRequest.getId(),agencyRequest.getManager(),agencyRequest.getDescription()));
+        agencyRepository.add(new Agency(agencyRequest.getWorkingHours(),agencyRequest.getzone(),agencyRequest.getId(),agencyRequest.getManager(),agencyRequest.getDescription()));
   
         AgencyEventProducer.emitAgencyLocationPinPointed(new AgencyLocationPinPointed(agencyRequest.getId(),agencyRequest.getLongitude(), agencyRequest.getLatitude()));
     }

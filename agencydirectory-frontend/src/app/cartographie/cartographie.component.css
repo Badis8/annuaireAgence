@@ -1,42 +1,41 @@
 .container {
   display: flex;
   width: 100%;
-  height: 100vh; /* Ensures the container takes the full height of the viewport */
+  height: 100vh;  
 }
 
 .list-wrap {
-  flex: 0 0 30%; /* Takes up 30% of the container width */
-  overflow-y: auto; /* Allows scrolling if the content exceeds the height */
-  overflow-x: hidden; /* Hides horizontal scrolling */
-  border-right: 1px solid #ccc; /* Optional: Adds a border for separation */
+  flex: 0 0 31%;  
+  overflow-y: auto;  
+  overflow-x: hidden; 
+  border-right: 1px solid #ccc; 
 }
 
-/* Custom scrollbar for the list */
+ 
 .list-wrap::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  width: 8px;  
 }
 
 .list-wrap::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Background color of the scrollbar track */
-  border-radius: 10px; /* Rounded corners */
+  background: #f1f1f1;  
+  border-radius: 10px;  
 }
-
 .list-wrap::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar thumb */
-  border-radius: 10px; /* Rounded corners */
+  background: #888;  
+  border-radius: 10px; 
 }
 
 .list-wrap::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color of the scrollbar thumb on hover */
+  background: #555;  
 }
 
 .map-wrap {
-  flex: 1; /* Takes up the remaining space */
-  position: relative; /* Ensures the map div takes the full height of this section */
+  flex: 1;  
+  position: relative;  
 }
 
 .map {
   width: 100%;
   height: 100%;
-  position: absolute; /* Ensures the map div takes the full height and width of this section */
+  position: absolute;  
 }

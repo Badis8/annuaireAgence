@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import {BusinessHours} from "../utility/timeZone"
 import {Agency} from "../agency"
@@ -13,7 +13,7 @@ export class SingleAgencyComponent {
  
   @Input() agency!: Agency;
   isOpen!:boolean
-
+  @Output() agencyClicked = new EventEmitter<string>();
   
   constructor(){
  
@@ -23,5 +23,7 @@ export class SingleAgencyComponent {
  
     this.isOpen = BusinessHours.isOpen(this.agency.workingHours);
   }
-  
+  onCardClick(): void {
+    this.agencyClicked.emit(this.agency.id);
+  }
 }

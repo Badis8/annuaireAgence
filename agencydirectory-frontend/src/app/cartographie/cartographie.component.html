@@ -1,6 +1,8 @@
 <div class="container">
   <div class="list-wrap">
-    <app-agency-list></app-agency-list>
+    <app-filtering-form></app-filtering-form>
+    <app-agency-list 
+    (agencyClickedInParent)="onAgencyClickedInGrandparent($event)">></app-agency-list>
   </div>
   <div class="map-wrap">
     <div class="map" #map></div>
