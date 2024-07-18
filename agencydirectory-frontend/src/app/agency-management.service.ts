@@ -34,5 +34,5 @@ export class AgencyManagementService {
     this.agencyService.filterAgencyList(this.filteredAgencies)
  
   }
-
+ 
 }

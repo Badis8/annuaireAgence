@@ -8,6 +8,8 @@ import { MapServiceLeafletImplementation } from './cartographie/services/MapServ
 })
 export class AgencyLocationManagementService {
   private _agencyFiltered = new EventEmitter<AgencyLocation[]>();
+ 
+  
   mapPresenter: MapPresenter = inject(MapServiceLeafletImplementation);
   url = 'http://localhost:8082/agency/listAgencys';
   agencies: AgencyLocation[] = []
@@ -15,7 +17,7 @@ export class AgencyLocationManagementService {
   get agencyFiltered() {
     return this._agencyFiltered.asObservable();
   }
-
+ 
   constructor() {
       this.getRemoteAgencysLocations().then((agencies: AgencyLocation[]) => {
       this.agencies = agencies;
@@ -35,8 +37,7 @@ export class AgencyLocationManagementService {
     this.filteredAgencies = this.agencies.filter(agencyLocation => 
       agencyIds.includes(agencyLocation.agencyID)
     );
-    console.log("initial filtering");
-    console.log(agencyIds);
+ 
     this._agencyFiltered.emit(this.filteredAgencies);
      
   }

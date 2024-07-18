@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import {BusinessHours} from "../utility/timeZone"
 import {Agency} from "../agency"
 import { RouterLink, RouterOutlet } from '@angular/router';
+import {OnClickHandlerService} from "../on-click-handler.service"
 @Component({
   selector: 'app-single-agency',
   standalone: true,
@@ -12,6 +13,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class SingleAgencyComponent {
  
+  overridenClickHandlerService: OnClickHandlerService = inject(OnClickHandlerService);
   @Input() agency!: Agency;
   isOpen!:boolean
   @Output() agencyClicked = new EventEmitter<string>();
@@ -25,6 +27,6 @@ export class SingleAgencyComponent {
     this.isOpen = BusinessHours.isOpen(this.agency.workingHours);
   }
   onCardClick(): void {
-    this.agencyClicked.emit(this.agency.id);
+    this.overridenClickHandlerService.emitClickEvent(this.agency.id);
   }
 }

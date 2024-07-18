@@ -9,6 +9,7 @@ import { AgencyListComponent } from '../agency-list/agency-list.component';
 import {MapServiceLeafletImplementation} from './services/MapServiceLeafletImplementation'
 import {FilteringFormComponent} from "../filtering-form/filtering-form.component"
 import { RouterOutlet,RouterLink } from '@angular/router';
+import { OnClickHandlerService } from '../on-click-handler.service';
 @Component({
   selector: 'app-cartographie',
   standalone: true,
@@ -21,6 +22,8 @@ export class CartographieComponent implements OnDestroy ,AfterViewInit{
   map: Map | undefined;
   agencyService: AgencyLocationManagementService = inject(AgencyLocationManagementService);
   mapPresenter: MapPresenter = inject(MapServiceLeafletImplementation);
+  overridenClickHandlerService: OnClickHandlerService = inject(OnClickHandlerService);
+
   @ViewChild('map')
   private mapContainer!: ElementRef<HTMLElement>;
 
@@ -33,10 +36,26 @@ export class CartographieComponent implements OnDestroy ,AfterViewInit{
  
       }
     });
+    this.agencyService.agencyFiltered.subscribe((filteredAgencies: AgencyLocation[]) => {
+      if (this.map) {
+          this.mapPresenter.pinPointMarkers(this.map,filteredAgencies)
+      }
+    });
     
- 
-  }
 
+    this.overridenClickHandlerService.agencyClicked.subscribe((agencyClicked: string) => {
+      const agency = this.findAgencyById(agencyClicked);
+    if (agency) {
+  
+      this.mapPresenter.zoomToLocation(this.map!, agency.latitude, agency.longitude, 15);
+    } else {
+      console.log('Agency not found');
+    }
+  })}
+
+
+
+  
    constructor(){
     
 }
@@ -55,7 +74,7 @@ export class CartographieComponent implements OnDestroy ,AfterViewInit{
   }
 
   onAgencyClickedInGrandparent(agencyId: string): void {
-      
+
     const agency = this.findAgencyById(agencyId);
     if (agency) {
   
