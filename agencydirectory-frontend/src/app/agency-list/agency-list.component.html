@@ -2,7 +2,7 @@
     <app-single-agency
       *ngFor="let agency of agencyService.filteredAgencies"
       [agency]="agency"
-      (agencyClicked)="onAgencyClicked($event)" 
+      @slideInOut (agencyClicked)="onAgencyClicked($event)" 
     ></app-single-agency>
 </div>
  

@@ -3,13 +3,29 @@ import { Agency } from '../agency';
 import {SingleAgencyComponent} from '../single-agency/single-agency.component'; 
 import { CommonModule } from '@angular/common';
 import { AgencyManagementService} from '../agency-management.service';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { RouterLink } from '@angular/router';
+ 
 @Component({
   selector: 'app-agency-list',
   standalone: true,
-  imports: [SingleAgencyComponent,CommonModule],
+  imports: [SingleAgencyComponent,CommonModule,RouterLink],
   templateUrl: './agency-list.component.html',
-  styleUrl: './agency-list.component.css'
+  styleUrl: './agency-list.component.css',
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('500ms ease-in', style({ transform: 'translateX(0%)' }))
+      ]),
+      transition(':leave', [
+        animate('500ms ease-in', style({ transform: 'translateX(-100%)' }))
+      ])
+    ])
+  ]
 })
+ 
+  
 export class AgencyListComponent {
   agencies: Agency[] = [];
   @Output() agencyClickedInParent = new EventEmitter<string>();

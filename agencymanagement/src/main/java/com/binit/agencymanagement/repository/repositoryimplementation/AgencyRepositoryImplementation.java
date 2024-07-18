@@ -4,11 +4,15 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
+ 
+import com.mongodb.client.model.Updates;
+ 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.binit.agencymanagement.agency.Agency;
+import com.binit.agencymanagement.agency.employe.Employe;
 import com.binit.agencymanagement.repository.AgencyRepository;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -39,5 +43,16 @@ public class AgencyRepositoryImplementation implements AgencyRepository {
     @Override
     public void removeAll() {
         mongoClient.getDatabase("Agency").getCollection("Agency").deleteMany(Filters.empty());
+    }
+    @Override
+    public void addEmployee(Employe employe, String id) {
+        MongoCollection<Agency> collection = getCollection();
+        collection.updateOne(Filters.eq("id", id), Updates.addToSet("employees", employe));
+    }
+    
+    @Override
+    public void removeEmployee(String employe, String id) {
+        MongoCollection<Agency> collection = getCollection();
+        collection.updateOne(Filters.eq("id", id), Updates.pull("employees", employe));
     }
 }

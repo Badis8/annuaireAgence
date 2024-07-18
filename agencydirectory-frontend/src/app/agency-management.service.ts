@@ -1,11 +1,13 @@
-import { Injectable, inject } from '@angular/core';
+import { EventEmitter, Injectable, inject } from '@angular/core';
 import { Agency } from './agency';
 import  { BusinessHours}    from "./utility/timeZone"
 import { AgencyLocationManagementService } from './agency-location-management.service'
+import { AgencyLocation } from './agency-location';
 @Injectable({
   providedIn: 'root' // why, my theopry is it makes it a singleton
 })
 export class AgencyManagementService { 
+ 
   url = 'http://localhost:8081/agency/listAgencys';
   agencies: Agency[] = []
   filteredAgencies: Agency[] = []
@@ -30,7 +32,7 @@ export class AgencyManagementService {
       return (!zone || agency.zone.includes(zone)) && (isOpen === undefined || isOpen === BusinessHours.isOpen(agency.workingHours));
     });
     this.agencyService.filterAgencyList(this.filteredAgencies)
-    
+ 
   }
 
 }

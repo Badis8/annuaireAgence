@@ -109,3 +109,27 @@
     transform: translateY(20px); 
     transition: transform 0.3s ease;
 }
+.details-button {
+  
+    top: 50%;
+    left: 10px;
+ 
+}
+
+.details-button button {
+    background-color: #f18100d2;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+ 
+}
+
+.details-button button:hover {
+ 
+    transform: scale(1.05);
+}
+
+ 

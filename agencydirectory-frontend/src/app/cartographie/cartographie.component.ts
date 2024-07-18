@@ -8,10 +8,11 @@ import { MapServiceImplementation } from './services/MapServiceImplementation';
 import { AgencyListComponent } from '../agency-list/agency-list.component'; 
 import {MapServiceLeafletImplementation} from './services/MapServiceLeafletImplementation'
 import {FilteringFormComponent} from "../filtering-form/filtering-form.component"
+import { RouterOutlet,RouterLink } from '@angular/router';
 @Component({
   selector: 'app-cartographie',
   standalone: true,
-  imports: [AgencyListComponent,FilteringFormComponent],
+  imports: [AgencyListComponent,FilteringFormComponent,RouterOutlet],
   templateUrl: './cartographie.component.html',
   styleUrls: ['./cartographie.component.css'],
   providers: [MapServiceLeafletImplementation]
@@ -54,7 +55,7 @@ export class CartographieComponent implements OnDestroy ,AfterViewInit{
   }
 
   onAgencyClickedInGrandparent(agencyId: string): void {
- 
+      
     const agency = this.findAgencyById(agencyId);
     if (agency) {
   

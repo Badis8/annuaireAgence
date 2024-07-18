@@ -1,8 +1,9 @@
 package com.binit.agencymanagement.service;
 
 import java.util.List;
-
+import java.util.UUID;
 import com.binit.agencymanagement.agency.Agency;
+import com.binit.agencymanagement.agency.employe.Employe;
 import com.binit.agencymanagement.dto.AgencyRequest;
 import com.binit.agencymanagement.repository.AgencyRepository;
 
@@ -18,10 +19,10 @@ public class AgencyServiceImplementation implements AgencyService {
 
     @Override
     public void addAgency(AgencyRequest agencyRequest ) {
-
-        agencyRepository.add(new Agency(agencyRequest.getWorkingHours(),agencyRequest.getzone(),agencyRequest.getId(),agencyRequest.getManager(),agencyRequest.getDescription()));
+        String randomId = UUID.randomUUID().toString();
+        agencyRepository.add(new Agency(agencyRequest.getWorkingHours(),agencyRequest.getzone(),randomId,agencyRequest.getManager(),agencyRequest.getDescription()));
   
-        AgencyEventProducer.emitAgencyLocationPinPointed(new AgencyLocationPinPointed(agencyRequest.getId(),agencyRequest.getLongitude(), agencyRequest.getLatitude()));
+        AgencyEventProducer.emitAgencyLocationPinPointed(new AgencyLocationPinPointed(randomId,agencyRequest.getLongitude(), agencyRequest.getLatitude()));
     }
 
     @Override
@@ -32,6 +33,19 @@ public class AgencyServiceImplementation implements AgencyService {
     @Override
     public void deleteAll() {
        this.agencyRepository.removeAll();
+    }
+
+    @Override
+    public void addEmployeeToAgency(Employe employe,String idAgency) {
+        
+        this.agencyRepository.addEmployee(employe, idAgency);
+        
+
+    }
+
+    @Override
+    public void removeEmployeeToAgency(String idAgency,String employeToRemove) {
+        this.addEmployeeToAgency(null, idAgency);
     }
     
 }

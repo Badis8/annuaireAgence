@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import {BusinessHours} from "../utility/timeZone"
 import {Agency} from "../agency"
+import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-single-agency',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink,RouterOutlet],
   templateUrl: './single-agency.component.html',
   styleUrls: ['./single-agency.component.css']
 })

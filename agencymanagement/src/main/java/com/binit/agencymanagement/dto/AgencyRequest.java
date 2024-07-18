@@ -1,6 +1,6 @@
 package com.binit.agencymanagement.dto;
 
-import com.binit.agencymanagement.agency.manager.Manager;
+import com.binit.agencymanagement.agency.employe.Employe;
 import com.binit.agencymanagement.agency.utility.TimeInterval;
 import com.binit.agencymanagement.agency.utility.WorkingHours;
 
@@ -9,8 +9,7 @@ public class AgencyRequest {
     private String zone;
     private WorkingHours workingHours;
     private String address;
-    private String id;
-    private Manager manager;
+    private Employe manager;
     private String description;
     private double latitude;
     private double longitude;
@@ -18,11 +17,10 @@ public class AgencyRequest {
     public AgencyRequest() {
     }
 
-    public AgencyRequest(String zone, WorkingHours workingHours, String address, String id, Manager manager, String description, double latitude, double longitude) {
+    public AgencyRequest(String zone, WorkingHours workingHours, String address, String id, Employe manager, String description, double latitude, double longitude) {
         this.zone = zone;
         this.workingHours = workingHours;
         this.address = address;
-        this.id = id;
         this.manager = manager;
         this.description = description;
         this.latitude = latitude;
@@ -61,19 +59,12 @@ public class AgencyRequest {
         this.description = description;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Manager getManager() {
+ 
+    public Employe getManager() {
         return manager;
     }
 
-    public void setManager(Manager manager) {
+    public void setManager(Employe manager) {
         this.manager = manager;
     }
 

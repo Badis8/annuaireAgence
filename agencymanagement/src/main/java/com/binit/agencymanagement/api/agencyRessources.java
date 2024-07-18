@@ -9,6 +9,7 @@ import jakarta.ws.rs.Path;
 import java.util.List;
 
 import com.binit.agencymanagement.agency.Agency;
+import com.binit.agencymanagement.dto.AddEmployeRequest;
 import com.binit.agencymanagement.dto.AgencyRequest;
 import com.binit.agencymanagement.service.AgencyService;
 
@@ -29,5 +30,10 @@ public class AgencyRessources {
     @Path("/deleteAll")
     public void deleteAll(){
             agencyService.deleteAll();
+    }
+    @POST
+    @Path("/addEmploye")
+    public void addEmploye(AddEmployeRequest request){
+          this.agencyService.addEmployeeToAgency(request.getEmploye(),request.getIdAgency());
     }
 }

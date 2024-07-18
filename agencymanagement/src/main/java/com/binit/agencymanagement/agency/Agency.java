@@ -1,21 +1,24 @@
 package com.binit.agencymanagement.agency;
 
+import java.util.List;
 import java.util.Objects;
-import com.binit.agencymanagement.agency.manager.Manager;
+
 import com.binit.agencymanagement.agency.utility.WorkingHours;
 import com.binit.agencymanagement.agency.Agency;
+import com.binit.agencymanagement.agency.employe.Employe;
 public class Agency {
 
- 
+    
     private WorkingHours workingHours;
     private String zone;
     private String id;
-    private Manager manager;
+    private Employe manager;
     private String address;
+    private List<Employe> employees; 
     public Agency() {
     }
 
-    public Agency(  WorkingHours workingHours, String zone, String id, Manager manager,String description) {
+    public Agency(  WorkingHours workingHours, String zone, String id, Employe manager,String description) {
         
         this.workingHours = workingHours;
         this.zone = zone;
@@ -56,11 +59,11 @@ public class Agency {
         this.id = id;
     }
 
-    public Manager getmanager() {
+    public Employe getmanager() {
         return manager;
     }
 
-    public void setmanager(Manager manager) {
+    public void setmanager(Employe manager) {
         this.manager = manager;
     }
 
@@ -80,4 +83,22 @@ public class Agency {
     public int hashCode() {
         return Objects.hash( this.id);
     }
+
+    public List<Employe> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employe> employees) {
+        this.employees = employees;
+    }
+   
+    public void addEmployee(Employe employee) {
+        this.employees.add(employee);
+    }
+
+    public void removeEmployeeById(String idEmployee) {
+     
+        employees.removeIf(emp -> emp.getEmployeID().equals(idEmployee)); //annoying that it iterates after finding the id
+    }
+
 }

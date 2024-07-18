@@ -6,7 +6,10 @@
         <div class="title">{{ agency.zone }} <span class="badge badge-pill" [ngClass]="isOpen ? 'badge-ouvert' : 'badge-fermee'"> {{ isOpen ? 'Ouvert' : 'Fermé' }} </span></div>
         <div class="subtitle">{{ agency.address }}</div>
       </div>
+      <div class="details-button">
+        <button [routerLink]="['/detail', agency.id]">See More Details</button>
     </div>
-  
+ 
+  </div>
 </div>
  

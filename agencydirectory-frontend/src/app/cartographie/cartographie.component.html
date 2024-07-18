@@ -1,8 +1,9 @@
 <div class="container">
   <div class="list-wrap">
+    
     <app-filtering-form></app-filtering-form>
-    <app-agency-list 
-    (agencyClickedInParent)="onAgencyClickedInGrandparent($event)">></app-agency-list>
+    <router-outlet></router-outlet>
+ 
   </div>
   <div class="map-wrap">
     <div class="map" #map></div>

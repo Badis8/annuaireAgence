@@ -1,30 +1,29 @@
-package com.binit.agencymanagement.agency.manager;
+package com.binit.agencymanagement.agency.employe;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.binit.agencymanagement.agency.utility.WorkingHours;
 
-import com.binit.agencymanagement.agency.utility.TimeInterval;
-
-
-import java.util.Objects;
-import com.binit.agencymanagement.agency.utility.TimeInterval;
-
-public class Manager {
-
+public class Employe {
+    private String employeID;
     private String fullName;
-    private TimeInterval availability;
-    private boolean isAvailable;
+    private WorkingHours availability;
     private String email;
     private String phoneNumber;
 
-    public Manager() {
+    public Employe() {
+    }
+    public String getEmployeID() {
+        return employeID;
     }
 
-    public Manager(String fullName, TimeInterval availability, boolean isAvailable, String email, String phoneNumber) {
+    public void setEmployeID(String employeID) {
+        this.employeID = employeID;
+    }
+    public Employe(String fullName, WorkingHours availability, String email, String phoneNumber) {
         this.fullName = fullName;
         this.availability = availability;
-        this.isAvailable = isAvailable;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
@@ -37,21 +36,15 @@ public class Manager {
         this.fullName = fullName;
     }
 
-    public TimeInterval getAvailability() {
+    public WorkingHours getAvailability() {
         return availability;
     }
 
-    public void setAvailability(TimeInterval availability) {
+    public void setAvailability(WorkingHours availability) {
         this.availability = availability;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
+     
 
     public String getEmail() {
         return email;
@@ -71,11 +64,11 @@ public class Manager {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Manager)) {
+        if (!(obj instanceof Employe)) {
             return false;
         }
 
-        Manager other = (Manager) obj;
+        Employe other = (Employe) obj;
 
         return Objects.equals(other.fullName, this.fullName);
     }
@@ -87,29 +80,28 @@ public class Manager {
 
     @Override
     public String toString() {
-        return "Manager{" +
+        return "Employe{" +
                 "fullName='" + fullName + '\'' +
                 ", availability=" + availability +
-                ", isAvailable=" + isAvailable +
+           
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 
-    public static Manager fromString(String string) {
-        Pattern pattern = Pattern.compile("Manager\\{fullName='([^']*)', availability=(.*), isAvailable=([^,]*), email='([^']*)', phoneNumber='([^']*)'\\}");
+    public static Employe fromString(String string) {
+        Pattern pattern = Pattern.compile("Employe\\{fullName='([^']*)', availability=(.*), email='([^']*)', phoneNumber='([^']*)'\\}");
         Matcher matcher = pattern.matcher(string);
 
         if (matcher.matches()) {
             String fullName = matcher.group(1);
-            TimeInterval availability = TimeInterval.fromString(matcher.group(2));
-            boolean isAvailable = Boolean.parseBoolean(matcher.group(3));
+            WorkingHours availability = WorkingHours.fromString(matcher.group(2));
             String email = matcher.group(4);
             String phoneNumber = matcher.group(5);
 
-            return new Manager(fullName, availability, isAvailable, email, phoneNumber);
+            return new Employe(fullName, availability, email, phoneNumber);
         } else {
             throw new IllegalArgumentException("Invalid Manager string: " + string);
-        }
+        } 
     }
 }
