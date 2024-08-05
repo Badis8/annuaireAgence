@@ -33,7 +33,7 @@ export class AgencyLocationManagementService {
   }
   filterAgencyList(agencies: Agency[]): void {
     const agencyIds = agencies.map(agency => agency.id);
-    console.log(this.agencies)
+ 
     this.filteredAgencies = this.agencies.filter(agencyLocation => 
       agencyIds.includes(agencyLocation.agencyID)
     );

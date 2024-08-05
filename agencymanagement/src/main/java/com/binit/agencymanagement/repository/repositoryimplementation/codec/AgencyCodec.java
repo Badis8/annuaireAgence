@@ -1,10 +1,10 @@
 package com.binit.agencymanagement.repository.repositoryimplementation.codec;
 
-import com.aayushatharva.brotli4j.common.annotations.Local;
 import com.binit.agencymanagement.agency.Agency;
 import com.binit.agencymanagement.agency.employe.Employe;
 import com.binit.agencymanagement.agency.utility.TimeInterval;
 import com.binit.agencymanagement.agency.utility.WorkingHours;
+import com.binit.agencymanagement.agency.utility.WeeklyWorkingHours;
 import com.mongodb.MongoClientSettings;
 import org.bson.*;
 import org.bson.codecs.CollectibleCodec;
@@ -14,10 +14,7 @@ import org.bson.codecs.EncoderContext;
 
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class AgencyCodec implements CollectibleCodec<Agency> {
 
@@ -26,27 +23,43 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
     public AgencyCodec() {
         this.documentCodec = MongoClientSettings.getDefaultCodecRegistry().get(Document.class);
     }
-       private Document encodeTimeInterval(TimeInterval timeInterval) {
+
+    private Document encodeTimeInterval(TimeInterval timeInterval) {
         Document doc = new Document();
-        doc.put("from", timeInterval.getFrom());
-        doc.put("to", timeInterval.getTo());
+        doc.put("from", timeInterval.getFrom().toString());
+        doc.put("to", timeInterval.getTo().toString());
         return doc;
     }
 
-  private TimeInterval decodeTimeInterval(Document doc) {
-    Date fromDate = doc.getDate("from");
-    Date toDate = doc.getDate("to");
+   private TimeInterval decodeTimeInterval(Document doc) {
+    Object fromObject = doc.get("from");
+    Object toObject = doc.get("to");
 
-    if (fromDate == null || toDate == null) {
-        throw new IllegalArgumentException("Date fields are null");
+    if (fromObject == null || toObject == null) {
+        throw new IllegalArgumentException("TimeInterval fields are null");
     }
 
-    LocalTime from = fromDate.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
-    LocalTime to = toDate.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+    LocalTime from;
+    LocalTime to;
+
+    if (fromObject instanceof Date) {
+        from = ((Date) fromObject).toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+    } else if (fromObject instanceof String) {
+        from = LocalTime.parse((String) fromObject);
+    } else {
+        throw new IllegalArgumentException("Unsupported type for 'from' field: " + fromObject.getClass());
+    }
+
+    if (toObject instanceof Date) {
+        to = ((Date) toObject).toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+    } else if (toObject instanceof String) {
+        to = LocalTime.parse((String) toObject);
+    } else {
+        throw new IllegalArgumentException("Unsupported type for 'to' field: " + toObject.getClass());
+    }
 
     return new TimeInterval(from, to);
 }
-
     private Document encodeWorkingHours(WorkingHours workingHours) {
         Document doc = new Document();
         if (workingHours.getMorningSession() != null) {
@@ -69,8 +82,21 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
         return workingHours;
     }
 
+    private Document encodeWeeklyWorkingHours(Map<String, WorkingHours> weeklyWorkingHours) {
+        Document doc = new Document();
+        for (Map.Entry<String, WorkingHours> entry : weeklyWorkingHours.entrySet()) {
+            doc.put(entry.getKey(), encodeWorkingHours(entry.getValue()));
+        }
+        return doc;
+    }
 
-
+    private Map<String, WorkingHours> decodeWeeklyWorkingHours(Document doc) {
+        Map<String, WorkingHours> weeklyWorkingHours = new HashMap<>();
+        for (String key : doc.keySet()) {
+            weeklyWorkingHours.put(key, decodeWorkingHours((Document) doc.get(key)));
+        }
+        return weeklyWorkingHours;
+    }
 
     private Document encodeEmploye(Employe employe) {
         Document doc = new Document();
@@ -79,6 +105,7 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
         doc.put("availability", employe.getAvailability() != null ? encodeWorkingHours(employe.getAvailability()) : null);
         doc.put("email", employe.getEmail());
         doc.put("phoneNumber", employe.getPhoneNumber());
+        doc.put("job", employe.getJob());
         return doc;
     }
 
@@ -91,17 +118,20 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
         }
         employe.setEmail(doc.getString("email"));
         employe.setPhoneNumber(doc.getString("phoneNumber"));
+        employe.setJob(doc.getString("job"));
         return employe;
     }
+
     @Override
     public void encode(BsonWriter writer, Agency agency, EncoderContext encoderContext) {
         Document doc = new Document();
         doc.put("address", agency.getAddress());
-        doc.put("workingHours", this.encodeWorkingHours(agency.getWorkingHours()));
+        doc.put("workingHours", encodeWeeklyWorkingHours(agency.getWorkingHours()));
         doc.put("zone", agency.getZone());
         doc.put("id", agency.getId());
-        doc.put("manager", agency.getmanager() != null ? encodeEmploye(agency.getmanager()) : null);
-
+        doc.put("manager", agency.getManager() != null ? encodeEmploye(agency.getManager()) : null);
+        doc.put("commune", agency.getCommune());
+        doc.put("phoneNumber",agency.getPhoneNumber());
         if (agency.getEmployees() != null && !agency.getEmployees().isEmpty()) {
             List<Document> employeesDoc = new ArrayList<>();
             for (Employe employee : agency.getEmployees()) {
@@ -143,9 +173,11 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
         agency.setId(document.getString("id"));
         agency.setAddress(document.getString("address"));
         agency.setZone(document.getString("zone"));
-        agency.setWorkingHours(this.decodeWorkingHours((Document) document.get("workingHours")));
+        agency.setCommune(document.getString("commune"));
+        agency.setPhoneNumber(document.getString("phoneNumber"));
+        agency.setWorkingHours(decodeWeeklyWorkingHours((Document) document.get("workingHours")));
         if (document.get("manager") != null) {
-            agency.setmanager(decodeEmploye((Document) document.get("manager")));
+            agency.setManager(decodeEmploye((Document) document.get("manager")));
         }
 
         List<Employe> employees = new ArrayList<>();
@@ -159,6 +191,4 @@ public class AgencyCodec implements CollectibleCodec<Agency> {
 
         return agency;
     }
-      
 }
-  

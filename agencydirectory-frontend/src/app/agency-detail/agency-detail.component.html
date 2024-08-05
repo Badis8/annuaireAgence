@@ -1,1 +1,10 @@
-<p>agency-detail works!</p>
+<div *ngIf="agencyDetails; else loading">
+    <app-agency-card [agencyDetails]="agencyDetails"></app-agency-card>
+    <app-employee-slider [employees]="agencyDetails.employees" > </app-employee-slider>
+    
+  </div>
+  
+  <ng-template #loading>
+    <p>Loading...</p>
+  </ng-template>
+  

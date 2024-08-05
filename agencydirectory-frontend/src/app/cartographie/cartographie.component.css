@@ -5,7 +5,7 @@
 }
 
 .list-wrap {
-  flex: 0 0 31%;  
+  flex: 0 0 38%;  
   overflow-y: auto;  
   overflow-x: hidden; 
   border-right: 1px solid #ccc; 

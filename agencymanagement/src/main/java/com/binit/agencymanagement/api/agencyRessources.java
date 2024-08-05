@@ -1,23 +1,45 @@
 package com.binit.agencymanagement.api;
 
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-
+import jakarta.ws.rs.PathParam;
+import org.jboss.resteasy.reactive.PartType;
+import org.jboss.resteasy.reactive.RestForm;
+import org.jboss.resteasy.reactive.multipart.FileUpload;
+import jakarta.ws.rs.core.MediaType;
 import java.util.List;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 
 import com.binit.agencymanagement.agency.Agency;
 import com.binit.agencymanagement.dto.AddEmployeRequest;
 import com.binit.agencymanagement.dto.AgencyRequest;
 import com.binit.agencymanagement.service.AgencyService;
 
+
+
 @Path("/agency")
 public class AgencyRessources {
     @Inject AgencyService agencyService;
+
+    
+
+    @GET
+    @Path("/parapID/{id}")
+    public  Agency getAgencyById(@PathParam("id") String id) {
+    
+        return this.agencyService.getAgencyByID(id);
+    }
     @POST
-    @Path("/addAgency")
+    @Consumes(MediaType.APPLICATION_JSON) 
+    @Path("/addAgency") 
     public void addAgency(AgencyRequest agency){
         agencyService.addAgency(agency);
     }
@@ -36,4 +58,31 @@ public class AgencyRessources {
     public void addEmploye(AddEmployeRequest request){
           this.agencyService.addEmployeeToAgency(request.getEmploye(),request.getIdAgency());
     }
+
+    
+ 
+    public static class Person {
+        public String firstName;
+        public String lastName;
+    }
+
+    @POST
+    @Path("/addImage")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public void multipart(@RestForm String description,
+                          @RestForm("image") @PartType(MediaType.APPLICATION_OCTET_STREAM) FileUpload file,
+                          @RestForm @PartType(MediaType.APPLICATION_JSON) Person person) throws Exception {
+     
+ 
+ 
+        java.nio.file.Path targetPath = Paths.get("./", file.fileName());
+ 
+       java.nio.file.Path inputStream = file.uploadedFile() ; 
+            Files.copy(inputStream, targetPath, StandardCopyOption.REPLACE_EXISTING);
+       
+
+       
+        System.out.println("File uploaded to: " + targetPath);
+    }
 }
+ 

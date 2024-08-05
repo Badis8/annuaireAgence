@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="agency-header">L'agence CAFPI {{agencyDetails.commune}}</div>
+    <div class="agency-info">
+        <img src="https://images.thebusinessplanshop.com/2225/creer-agence-communication.jpg" alt="Agency Image" width="300" height="200">
+        <div class="agency-details">
+            <h3>{{agencyDetails.address}}</h3>
+            <div class="icon">
+                <img src="phone-icon.png" alt="Phone Icon" width="20" height="20">
+                <p>{{agencyDetails.phoneNumber}}  </p>
+            </div>
+            <div class="icon">
+                <img src="secure-icon.png" alt="Secure Icon" width="20" height="20">
+                <p>{{agencyDetails.phoneNumber}}</p>
+            </div>
+        
+        </div>
+    </div>
+    <div class="opening-hours">
+        <div *ngFor="let day of daysOfWeek">
+          <h4>{{ day }}</h4>
+          <p>{{ getOpeningHours(day, 'morningSession') }}</p>
+          <p>{{ getOpeningHours(day, 'eveningSession') }}</p>
+        </div>
+      </div>
+    </div>

@@ -1,23 +1,25 @@
 package com.binit.agencymanagement.dto;
 
+import java.util.Map;
 import com.binit.agencymanagement.agency.employe.Employe;
-import com.binit.agencymanagement.agency.utility.TimeInterval;
 import com.binit.agencymanagement.agency.utility.WorkingHours;
 
 public class AgencyRequest {
 
     private String zone;
-    private WorkingHours workingHours;
+    private Map<String, WorkingHours> workingHours;
     private String address;
     private Employe manager;
     private String description;
     private double latitude;
     private double longitude;
+    private String commune;
+    private String phoneNumber;   
 
     public AgencyRequest() {
     }
 
-    public AgencyRequest(String zone, WorkingHours workingHours, String address, String id, Employe manager, String description, double latitude, double longitude) {
+    public AgencyRequest(String zone, Map<String, WorkingHours> workingHours, String address, Employe manager, String description, double latitude, double longitude, String commune, String phoneNumber) {
         this.zone = zone;
         this.workingHours = workingHours;
         this.address = address;
@@ -25,29 +27,31 @@ public class AgencyRequest {
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.commune = commune;
+        this.phoneNumber = phoneNumber;  
     }
 
-    public String getzone() {
+    public String getZone() {
         return zone;
     }
 
-    public void setzone(String zone) {
+    public void setZone(String zone) {
         this.zone = zone;
     }
 
-    public WorkingHours getWorkingHours() {
+    public Map<String, WorkingHours> getWorkingHours() {
         return workingHours;
     }
 
-    public void setWorkingHours(WorkingHours workingHours) {
+    public void setWorkingHours(Map<String, WorkingHours> workingHours) {
         this.workingHours = workingHours;
     }
 
-    public String getaddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setaddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -59,7 +63,6 @@ public class AgencyRequest {
         this.description = description;
     }
 
- 
     public Employe getManager() {
         return manager;
     }
@@ -82,5 +85,21 @@ public class AgencyRequest {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getCommune() {
+        return commune;
+    }
+
+    public void setCommune(String commune) {
+        this.commune = commune;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

@@ -1,0 +1,131 @@
+.profile-card-1 {
+    width: 250px; 
+    height: 320px;  
+    background: white;
+    margin: 0 auto;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 4px 4px 10px #999;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.profile-card-1 .img img {
+    width: 120px; 
+    height: 120px;  
+    padding: 3px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.6);
+    position: absolute;
+    left: calc(50% - 63px);  
+    top: 20px;  
+}
+
+.profile-card-1 .img {
+    height: 100px;  
+    width: 100%;
+    background-image: linear-gradient(to right, #ffeda3, #fda65d, #f76b1c, #f2552c, #d11c1c);
+    padding: 15px;  
+    box-sizing: border-box;
+    position: relative;
+}
+
+.profile-card-1 .mid-section {
+    position: absolute;
+    height: 170px; 
+    width: 100%;
+    top: 170px;  
+    left: 0;
+    padding: 5px 15px 0; 
+    box-sizing: border-box;
+    background: white;
+}
+
+.profile-card-1 .mid-section .name {
+    color: #333333;
+    font-size: 1.2em;  
+    padding-top: 5px;
+    background: rgba(255,255,255,0.1);
+    font-weight: bold;
+}
+
+.profile-card-1 .mid-section .description {
+    color: gray;
+    font-size: 0.8em;  
+}
+
+.profile-card-1 .mid-section .line {
+    background: #7ee2a8;
+    width: 70%; /* Reduced width */
+    height: 2px;
+    margin: 5px auto -3px;
+}
+
+.profile-card-1 .contact-info {
+    margin-top: 10px;
+}
+
+.profile-card-1 .subtext {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+    color: #333;
+}
+
+.profile-card-1 .subtext i {
+    margin-right: 10px;
+}
+
+.phone {
+    font-family: monospace; 
+    font-size: 0.8rem;  
+}
+
+.email {
+    font-family: sans-serif;  
+    font-size: 0.7rem;  
+    color: #999;  
+}
+
+.profile-card-1 .img::after {
+    content: "";
+    position: absolute;
+    width: 140px; 
+    height: 140px; 
+    border-radius: 50%;
+    left: calc(50% - 70px); 
+    top: 15px; 
+    border: 3px solid rgba(255,255,255,0.4);
+}
+
+.profile-card-1 .img::before {
+    content: "";
+    position: absolute;
+    width: 150px; 
+    height: 150px;  
+    border-radius: 50%;
+    left: calc(50% - 75px);  
+    top: 10px;  
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.profile-card-1 .view-more {
+    position: absolute;
+    top: 120px;  
+    left: calc(50% - 20px);  
+    z-index: 2;
+}
+
+.profile-card-1 .view-more .custom-logo {
+    width: 30px;  
+    height: 30px;  
+    border-radius: 50%;
+    background: white;
+    padding: 3px;  
+}
+
+.contact {
+    margin-top: 1em;  
+}

@@ -25,6 +25,7 @@ export class AgencyManagementService {
   }
   async getRemoteAgencys(): Promise<Agency[]> {
     const data = await fetch(this.url);
+ 
     return (await data.json()) ?? [];
   }
   filterAgencyList(zone: string|undefined|null, isOpen: boolean|undefined|null) {

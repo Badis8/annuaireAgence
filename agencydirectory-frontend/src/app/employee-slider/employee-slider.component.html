@@ -1,0 +1,30 @@
+<div class="employee-section">
+  <h2 class="employee-label">Our Employees</h2>
+<swiper-container class="swiper-container" 
+                  effect="grid"
+                  [slidesPerView]="1"
+                  pagination="{ clickable: true }"
+                  centeredSlides="true">
+  
+  @for (employe of employees; track employe) {
+    <swiper-slide>
+      <app-employe-card [employee]="employe"></app-employe-card>
+    </swiper-slide>
+  }
+
+</swiper-container>
+
+ 
+ 
+  
+  
+
+<div class="view-all-container">
+ 
+  <button (click)="toggleForm()">View All</button>
+</div>
+<form *ngIf="showForm">
+  <h3>Display All Employees</h3>
+  
+</form> 
+</div>

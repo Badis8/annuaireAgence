@@ -11,7 +11,7 @@ public class Employe {
     private WorkingHours availability;
     private String email;
     private String phoneNumber;
-
+    private String job;
     public Employe() {
     }
     public String getEmployeID() {
@@ -21,13 +21,22 @@ public class Employe {
     public void setEmployeID(String employeID) {
         this.employeID = employeID;
     }
-    public Employe(String fullName, WorkingHours availability, String email, String phoneNumber) {
+    public Employe(String fullName, WorkingHours availability, String email, String phoneNumber,String job) {
         this.fullName = fullName;
         this.availability = availability;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.job=job;
     }
 
+    public String getJob() {
+        return this.job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+    
     public String getFullName() {
         return fullName;
     }
@@ -89,19 +98,5 @@ public class Employe {
                 '}';
     }
 
-    public static Employe fromString(String string) {
-        Pattern pattern = Pattern.compile("Employe\\{fullName='([^']*)', availability=(.*), email='([^']*)', phoneNumber='([^']*)'\\}");
-        Matcher matcher = pattern.matcher(string);
-
-        if (matcher.matches()) {
-            String fullName = matcher.group(1);
-            WorkingHours availability = WorkingHours.fromString(matcher.group(2));
-            String email = matcher.group(4);
-            String phoneNumber = matcher.group(5);
-
-            return new Employe(fullName, availability, email, phoneNumber);
-        } else {
-            throw new IllegalArgumentException("Invalid Manager string: " + string);
-        } 
-    }
+     
 }

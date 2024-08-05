@@ -16,4 +16,6 @@ public interface AgencyService {
 
         public void removeEmployeeToAgency(String idEmploye,String employeToRemove);
 
+        public Agency getAgencyByID(String idAgency);
+
 }
