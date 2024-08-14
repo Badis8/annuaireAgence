@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ 
+    <div class="container">
+        <aside class="sidebar"> 
+            <form [formGroup]="agencyFilter" (ngSubmit)="onSubmit()">
+                <div class="input-group">
+                  <label for="manager">Manager:</label>
+                  <input id="manager" type="text" formControlName="manager" />
+                </div>
+              
+                <div class="input-group">
+                  <label for="commune">Commune:</label>
+                  <input id="commune" type="text" formControlName="commune" />
+                </div>
+              
+                <div class="input-group">
+                  <label for="employee">Employee:</label>
+                  <input id="employee" type="text" formControlName="employee" />
+                </div>
+              
+                <div class="input-group">
+                  <label for="zone">Zone:</label>
+                  <select id="zone" formControlName="zone">
+                    <option value="">Select Zone</option>
+                    <option value="Option1">Option 1</option>
+                    <option value="Option2">Option 2</option>
+                  </select>
+                </div>
+              
+                <button class="search-btn" type="submit">Search</button>
+                <button class="create-agency-btn" (click)="goToCreateAgency()">Create Agency</button>
+              </form>
+             
+        </aside>
+      
+        <main class="content">
+            <header class="content-header">
+                <h1>Cafpi Agencys</h1>
+            </header>
+            <table class="sessions-table">
+                <thead>
+                    <tr>
+                        <th>Manager</th>
+                        <th>Commune</th>
+                        <th>Zone</th>
+                        <th>Number of Employee</th>
+                        <th>Manage</th>
+                        <th>Delete</th>
+                  
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    <tr *ngFor="let agency of agencyService.filteredAgencies">
+                        <td>{{ agency.manager.fullName }}</td>
+                        <td>{{ agency.commune }}</td>
+                        <td>{{ agency.zone }}</td>
+                        <td>{{ agency.employees.length }}</td>
+                        <td><i class="fas fa-edit"></i></td>
+                       <td>  <i class="fas fa-trash" (click)="onDeleteAgency(agency.id)"></i> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+ 

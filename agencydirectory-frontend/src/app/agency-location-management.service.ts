@@ -3,6 +3,7 @@ import { AgencyLocation } from './agency-location';
 import { Agency } from './agency';
 import { MapPresenter } from './cartographie/services/MapService';
 import { MapServiceLeafletImplementation } from './cartographie/services/MapServiceLeafletImplementation';
+import { AgencyManagementService } from './agency-management.service';
 @Injectable({
   providedIn: 'root'
 })

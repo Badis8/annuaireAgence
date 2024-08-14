@@ -49,5 +49,10 @@ public class AgencyServiceImplementation implements AgencyService {
     public Agency  getAgencyByID(String idAgency) {
       return this.agencyRepository.getAgency(idAgency);
     }
+
+    @Override
+    public void deleteAgency(String idAgency) {
+      this.agencyRepository.removeById(idAgency);
+    }
     
 }

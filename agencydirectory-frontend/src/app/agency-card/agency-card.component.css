@@ -9,6 +9,8 @@
     color: #ff7a21;
     font-size: 2em;
     margin-bottom: 20px;
+    
+
 }
 .agency-info {
     display: flex;
@@ -64,3 +66,15 @@
     color: #666;
     font-size: 0.7em; 
 }
+.agency-header {
+    display: flex;
+    align-items: center;
+    gap: 120px;
+  }
+
+  .back-icon {
+    font-size: 24px;
+    color: #04AA6D;
+    cursor: pointer;
+    margin-top: 8px;
+  }

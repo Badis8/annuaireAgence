@@ -1,9 +1,17 @@
-<div *ngIf="agencyDetails; else loading">
+<div *ngIf="agencyDetails; else loading"  class="agency-container">
     <app-agency-card [agencyDetails]="agencyDetails"></app-agency-card>
-    <app-employee-slider [employees]="agencyDetails.employees" > </app-employee-slider>
-    
-  </div>
+    <div *ngIf="showSlider">
+      <app-employee-slider [employees]="agencyDetails.employees"></app-employee-slider>
+    </div>
   
+    <div *ngIf="!showSlider">
+      <app-employee-grid [employees]="agencyDetails.employees"></app-employee-grid>
+    </div>
+ 
+    <div class="button-container">
+      <button (click)="toggleView()">{{ buttonText }}</button>
+    </div>
+  </div>
   <ng-template #loading>
     <p>Loading...</p>
   </ng-template>

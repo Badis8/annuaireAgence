@@ -1,5 +1,6 @@
 package com.binit.agencymanagement.api;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -11,6 +12,8 @@ import org.jboss.resteasy.reactive.PartType;
 import org.jboss.resteasy.reactive.RestForm;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
 import java.util.List;
 
 import java.nio.file.Files;
@@ -59,8 +62,20 @@ public class AgencyRessources {
           this.agencyService.addEmployeeToAgency(request.getEmploye(),request.getIdAgency());
     }
 
-    
- 
+ @DELETE
+    @RolesAllowed("admin")
+    @Path("/delete/{id}")
+    public Response deleteAgency(@PathParam("id") String id) {
+        try {
+            this.agencyService.deleteAgency(id);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                           .entity("Failed to delete agency: " + e.getMessage())
+                           .build();
+        }
+    }
+
     public static class Person {
         public String firstName;
         public String lastName;

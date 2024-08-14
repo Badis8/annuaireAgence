@@ -60,4 +60,16 @@ public class AgencyRepositoryImplementation implements AgencyRepository {
         MongoCollection<Agency> collection = getCollection();
         return collection.find(Filters.eq("id", agencyID)).first();
     }
+    @Override
+    public Agency removeById(String agencyID) {
+        MongoCollection<Agency> collection = getCollection();
+ 
+        Agency agency = collection.find(Filters.eq("id", agencyID)).first();
+        if (agency != null) {
+   
+            collection.deleteOne(Filters.eq("id", agencyID));
+        }
+        return agency;
+    }
+    
 }

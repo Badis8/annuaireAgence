@@ -3,17 +3,18 @@
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    max-width: 500px;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease, margin-bottom 0.3s ease;
     margin: 5px;
-    margin-left: 12px;
+    margin-left: 45px;
 }
 
 .tag {
     font-size: 14px;
     color: #777;
     margin-bottom: 8px;
+  
 }
 
 .content {

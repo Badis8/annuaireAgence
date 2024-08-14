@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common';
 import { AgencyManagementService} from '../agency-management.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { RouterLink } from '@angular/router';
- 
+import {FilteringFormComponent} from "../filtering-form/filtering-form.component"
 @Component({
   selector: 'app-agency-list',
   standalone: true,
-  imports: [SingleAgencyComponent,CommonModule,RouterLink],
+  imports: [SingleAgencyComponent,CommonModule,RouterLink,FilteringFormComponent],
   templateUrl: './agency-list.component.html',
   styleUrl: './agency-list.component.css',
   animations: [

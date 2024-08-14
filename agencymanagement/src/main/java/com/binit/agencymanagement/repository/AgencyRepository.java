@@ -19,4 +19,6 @@ public interface AgencyRepository {
     public void removeEmployee(String employeID, String id); 
    
     public Agency getAgency(String EmployeID);
+
+    public Agency removeById(String EmployeID);
 }

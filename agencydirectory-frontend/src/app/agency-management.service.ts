@@ -4,7 +4,7 @@ import  { BusinessHours}    from "./utility/timeZone"
 import { AgencyLocationManagementService } from './agency-location-management.service'
 import { AgencyLocation } from './agency-location';
 @Injectable({
-  providedIn: 'root' // why, my theopry is it makes it a singleton
+  providedIn: 'root'  
 })
 export class AgencyManagementService { 
  
@@ -27,11 +27,14 @@ export class AgencyManagementService {
     const data = await fetch(this.url);
  
     return (await data.json()) ?? [];
+ 
   }
   filterAgencyList(zone: string|undefined|null, isOpen: boolean|undefined|null) {
     this.filteredAgencies= this.agencies.filter(agency => {
-      return (!zone || agency.zone.includes(zone)) && (isOpen === undefined || isOpen === BusinessHours.isOpen(agency.workingHours));
+
+      return (!zone || agency.zone.includes(zone)) && (isOpen === undefined || isOpen === BusinessHours.isOpen(agency.workingHours[  new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase()]));
     });
+    
     this.agencyService.filterAgencyList(this.filteredAgencies)
  
   }

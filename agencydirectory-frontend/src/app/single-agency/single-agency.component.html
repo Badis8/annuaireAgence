@@ -7,7 +7,7 @@
         <div class="subtitle">{{ agency.address }}</div>
       </div>
       <div class="details-button">
-        <button [routerLink]="['/detail', agency.id]">See More Details</button>
+        <button (click)="onButtonClick()">See More Details</button>
     </div>
  
   </div>

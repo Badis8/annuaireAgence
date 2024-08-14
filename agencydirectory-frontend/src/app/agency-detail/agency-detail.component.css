@@ -1,0 +1,31 @@
+.agency-container {
+    display: flex;
+    flex-direction: column;
+ 
+  }
+  
+  .button-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #04AA6D;  
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+ 
+    font-size: 1em;
+ 
+    cursor: pointer;
+    padding: 12px 28px;
+    border-radius: 10px;
+    max-width: 200px; 
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+ 
+  }

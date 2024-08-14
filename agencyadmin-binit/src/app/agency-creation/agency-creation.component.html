@@ -1,0 +1,79 @@
+<div class="header">
+    <h1>Registry Agency</h1>
+    <p class="description">Please fill out the following details to configure the agency settings.</p>
+  </div>
+<div class="form-container">
+    <div class="stepper">
+      <div class="step" *ngFor="let step of steps; let i = index" (click)="goToStep(i)" [class.active]="currentStep === i">
+        <span class="step-number">{{ i + 1 }}</span> {{step.label}}
+      </div>
+    </div>
+  
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div *ngIf="currentStep === 0">
+      
+  
+      
+  
+        <label for="name">email</label>
+        <input id="email" formControlName="email" type="text" />
+
+        <label for="phone">Phone Number:</label>
+        <input id="phone" type="tel" name="phone"  formControlName="zone"  pattern="[0-9]{10}" required />
+      
+        <label for="zone"> zone</label>
+        <input id="zone" formControlName="zone" type="text" />
+
+        <label for="coomune">coomune</label>
+        <input id="coomune" formControlName="coomune" type="text"/> 
+
+        <label for="address">address</label>
+        <input id="address" formControlName="address" type="text" /> 
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description">  </textarea> 
+  
+  
+
+
+ 
+      </div>
+  
+      <div *ngIf="currentStep === 1"> 
+
+        <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Morning Session</th>
+                <th>Evening Session</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let day of days">
+                <td>{{ day }}</td>
+                <td>
+                  <input type="time" [formGroupName]="day" formControlName="morningSession.from" required>
+                  <span>to</span>
+                  <input type="time" [formGroupName]="day" formControlName="morningSession.to" required>
+                </td>
+                <td>
+                  <input type="time" [formGroupName]="day" formControlName="eveningSession.from" required>
+                  <span>to</span>
+                  <input type="time" [formGroupName]="day" formControlName="eveningSession.to" required>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      
+
+
+        </div>
+  
+      <div class="buttons">
+        <button type="button" class="back-button" (click)="previousStep()" [disabled]="currentStep === 0">Back</button>
+        <button type="button" class="next-button" (click)="nextStep()" *ngIf="currentStep < steps.length - 1">Next</button>
+        <button type="submit" class="submit-button" *ngIf="currentStep === steps.length - 1">Submit</button>
+      </div>
+    </form>
+  </div>
+  

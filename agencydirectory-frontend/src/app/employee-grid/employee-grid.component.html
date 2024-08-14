@@ -1,17 +1,6 @@
 <div class="employee-grid">
     <div *ngFor="let employee of employees" class="employee-card">
-      <img  src="assets/achref.png" alt="{{ employee.fullName }}" class="employee-picture">
-      <div class="employee-details">
-        <h3>{{ employee.fullName }}</h3>
-        <p><strong>ID:</strong> {{ employee.employeID }}</p>
-        <p><strong>Email:</strong> {{ employee.email }}</p>
-        <p><strong>Phone:</strong> {{ employee.phoneNumber }}</p>
-        <p><strong>Job:</strong> {{ employee.job }}</p>
-        <div class="availability">
-          <h4>Availability:</h4>
-        
-        </div>
-      </div>
+        <div class="grid-item">  <app-employe-card [employee]="employee" ></app-employe-card> </div>
     </div>
   </div>
   
