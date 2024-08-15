@@ -78,3 +78,29 @@
     cursor: pointer;
     margin-top: 8px;
   }
+
+  .fa-phone-alt{
+ 
+    margin-right: 5px;
+  }
+
+
+  .agency-details h4 {
+    font-family: 'Roboto', sans-serif;  
+    font-weight: 500;   
+    font-size: 1rem;   
+    color: #333;   
+}
+
+.icon i {
+    color: #666; 
+    font-size: 1rem;  
+    margin-right: 8px;   
+    height: 10%;
+}
+
+ .icon{
+ 
+
+    margin-left:20px ;
+ }

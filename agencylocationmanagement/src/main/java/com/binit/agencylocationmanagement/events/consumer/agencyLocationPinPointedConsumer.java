@@ -17,4 +17,17 @@ public class agencyLocationPinPointedConsumer {
         agencyRepository.add(new Agency(agencyLocationPinPointed));
 
     }
+
+   
+
+    @Transactional
+    @Incoming("agencyDeleted")
+    public void consumeAgencyDeleted(String  id) {
+        System.out.println(id);
+        agencyRepository.removeById(id);
+
+    }
+
+
+
 }

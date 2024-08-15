@@ -1,12 +1,12 @@
 .form-container {
     display: flex;
-    max-width: 800px;
+    max-width: 1200px;
     margin: auto;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    font-family: 'Roboto', sans-serif; /* Improved font */
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
   }
   .header {
     text-align: center;
@@ -25,17 +25,9 @@
     color: #666;
     margin: 0;
   }
-  .stepper {
-    width: 25%;
-    margin-right: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align labels to the top */
-    padding-right: 20px;
-    border-right: 2px solid #ddd; /* Add vertical line */
-  }
   
-  .step {
+  .step { 
+    height: 30px;  
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -58,10 +50,11 @@
   }
   
   .step.active {
-    color: #007bff; /* Change color to blue when selected */
-    background-color: #e7f1ff;
-    font-weight: bold;
-  }
+    background-color: #007bff;
+    color: white;
+    font-size: 16px; /* Make the active step label larger */
+    height : 35px; /* Make the active step slightly larger */
+}
   
   form {
     width: 75%;
@@ -132,5 +125,149 @@
     border-radius: 4px;
     font-size: 14px; /* Improve font size */
     font-family: 'Roboto', sans-serif;
+ 
   }
   
+.stepper {
+    width: 15%;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 20px;
+    border-right: 2px solid #ddd; 
+ 
+    margin-right: 20px;
+    padding-right: 10px; /* Decrease padding if necessary */
+    border-right: 2px solid #ddd;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.step {
+    padding: 8px 12px;  
+    margin-bottom: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #555;
+    background-color: #f7f7f7;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.step:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+.step.active {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
+.step-number {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+.step.active {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
+input[type="text"], input[type="tel"], textarea, select {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:hover, input[type="tel"]:hover, textarea:hover, select:hover {
+    border-color: #007bff;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+button {
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button {
+    background-color: #ccc;
+    color: #ffffff;
+}
+
+.next-button, .submit-button {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.back-button:hover {
+    background-color: #aaa;
+}
+
+.next-button:hover, .submit-button:hover {
+    background-color: #0056b3;
+}
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.schedule-table th, .schedule-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.schedule-table thead {
+    background-color: #f7f7f7;
+}
+
+.schedule-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.schedule-table input[type="time"] {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.schedule-table .time-input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin:5px;
+}
+
+.devider{
+    margin:10px;
+}
+
+
+ 

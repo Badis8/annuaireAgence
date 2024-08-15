@@ -38,7 +38,9 @@ export class AgencyDetailComponent {
  
       if (agencyId) {
         this.singleAgencyDetailsService.getRemoteAgencysDetails(agencyId).then(details => {
-          this.agencyDetails = details;        
+          console.log(details);
+          this.agencyDetails = details;     
+          this.agencyDetails.employees.push(this.agencyDetails.manager);
         });
       }
     });

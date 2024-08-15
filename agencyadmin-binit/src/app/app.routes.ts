@@ -9,5 +9,5 @@ export const routes: Routes = [
   { path: 'agencyManagement', component: AgencyManagementComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent }, 
   { path: 'create-agency', component: AgencyCreationComponent },
-  { path: '**', redirectTo: 'login' }  
+  { path: '**', redirectTo: 'agencyManagement' }  
 ];

@@ -7,7 +7,7 @@
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease, margin-bottom 0.3s ease;
     margin: 5px;
-    margin-left: 45px;
+    margin-left: 15px;
 }
 
 .tag {

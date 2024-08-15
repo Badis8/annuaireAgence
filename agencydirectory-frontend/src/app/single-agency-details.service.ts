@@ -7,7 +7,7 @@ import { AgencyDetails } from './agency-details';
 export class SingleAgencyDetailsService {
     
  
-  url = 'http://localhost:8081/agency/parapID/';
+  url = 'http://localhost:8083/agency/parapID/';
   agencies: AgencyDetails | undefined  
  
  

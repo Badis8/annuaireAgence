@@ -3,9 +3,10 @@
     <p class="description">Please fill out the following details to configure the agency settings.</p>
   </div>
 <div class="form-container">
+ 
     <div class="stepper">
       <div class="step" *ngFor="let step of steps; let i = index" (click)="goToStep(i)" [class.active]="currentStep === i">
-        <span class="step-number">{{ i + 1 }}</span> {{step.label}}
+            {{step.label}}
       </div>
     </div>
   
@@ -39,35 +40,40 @@
       </div>
   
       <div *ngIf="currentStep === 1"> 
-
-        <table class="schedule-table">
+        <table class="schedule-table" *ngIf="scheduleFormGroup" [formGroup]="scheduleFormGroup">
             <thead>
-              <tr>
-                <th>Day</th>
-                <th>Morning Session</th>
-                <th>Evening Session</th>
-              </tr>
+                <tr>
+                    <th>Day</th>
+                    <th>Morning Session</th>
+                    <th>Evening Session</th>
+                </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let day of days">
-                <td>{{ day }}</td>
-                <td>
-                  <input type="time" [formGroupName]="day" formControlName="morningSession.from" required>
-                  <span>to</span>
-                  <input type="time" [formGroupName]="day" formControlName="morningSession.to" required>
-                </td>
-                <td>
-                  <input type="time" [formGroupName]="day" formControlName="eveningSession.from" required>
-                  <span>to</span>
-                  <input type="time" [formGroupName]="day" formControlName="eveningSession.to" required>
-                </td>
-              </tr>
+                <tr *ngFor="let day of days" [formGroupName]="day">
+                    <td>{{ day }}</td>
+                    <td [formGroupName]="'morningSession'"> 
+                        <div class="time-input-group">
+                        <input type="time" formControlName="from" required>
+                        <span class="devider">to</span>
+                        <input type="time" formControlName="to" required>
+                        </div>
+                    </td>
+                    <td [formGroupName]="'eveningSession'"> 
+                        <div class="time-input-group">
+                        <input type="time" formControlName="from" required>
+                        <span class="devider">to</span>
+                        <input type="time" formControlName="to" required>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
-          </table>
-      
+        </table>
+    </div>  
 
-
-        </div>
+    <div *ngIf="currentStep === 2"> 
+     
+     <app-map> </app-map>
+    </div>
   
       <div class="buttons">
         <button type="button" class="back-button" (click)="previousStep()" [disabled]="currentStep === 0">Back</button>
@@ -75,5 +81,6 @@
         <button type="submit" class="submit-button" *ngIf="currentStep === steps.length - 1">Submit</button>
       </div>
     </form>
+ 
   </div>
   

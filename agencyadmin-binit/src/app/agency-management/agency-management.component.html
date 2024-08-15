@@ -35,7 +35,7 @@
       
         <main class="content">
             <header class="content-header">
-                <h1>Cafpi Agencys</h1>
+                <h1>Cafpi Agencies</h1>
             </header>
             <table class="sessions-table">
                 <thead>
@@ -55,7 +55,7 @@
                         <td>{{ agency.manager.fullName }}</td>
                         <td>{{ agency.commune }}</td>
                         <td>{{ agency.zone }}</td>
-                        <td>{{ agency.employees.length }}</td>
+                        <td>{{ agency.employees.length +1 }}</td>
                         <td><i class="fas fa-edit"></i></td>
                        <td>  <i class="fas fa-trash" (click)="onDeleteAgency(agency.id)"></i> </td>
                     </tr>

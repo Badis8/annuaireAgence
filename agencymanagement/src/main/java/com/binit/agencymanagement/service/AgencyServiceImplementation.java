@@ -52,7 +52,8 @@ public class AgencyServiceImplementation implements AgencyService {
 
     @Override
     public void deleteAgency(String idAgency) {
-      this.agencyRepository.removeById(idAgency);
+      this.agencyRepository.removeById(idAgency); 
+      this.AgencyEventProducer.emitAgencyDeleted(idAgency);
     }
     
 }

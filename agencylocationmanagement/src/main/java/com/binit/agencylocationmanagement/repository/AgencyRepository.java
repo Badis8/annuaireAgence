@@ -7,6 +7,9 @@ public interface AgencyRepository {
     public void add(Agency agency);
 
     public List<Agency> list(); 
+    
+    public void removeById(String id); 
 
+    
 
 }

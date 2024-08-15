@@ -8,7 +8,7 @@ import { AgencyLocation } from './agency-location';
 })
 export class AgencyManagementService { 
  
-  url = 'http://localhost:8081/agency/listAgencys';
+  url = 'http://localhost:8083/agency/listAgencys';
   agencies: Agency[] = []
   filteredAgencies: Agency[] = []
   agencyService: AgencyLocationManagementService = inject(AgencyLocationManagementService);

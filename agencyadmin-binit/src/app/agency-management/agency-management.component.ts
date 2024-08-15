@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import {KeycloackService} from "../keycloack.service";
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';  
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; 
+import { GeoLocation } from '../geo-location';
 @Component({
   selector: 'app-agency-management',
   standalone: true,
@@ -25,7 +26,9 @@ export class AgencyManagementComponent {
   onSubmit() {
     this.agencyService.filterAgencyList(this.agencyFilter.value.zone,this.agencyFilter.value.commune,this.agencyFilter.value.manager,this.agencyFilter.value.employee)
   } 
-
+  handleMapClick(data: GeoLocation): void {
+      console.log(data);
+  }
   goToCreateAgency() {
     this.router.navigate(['/create-agency']); 
   }
@@ -36,5 +39,6 @@ export class AgencyManagementComponent {
     }).catch((error) => {
       console.error('Error deleting agency:', error);
     });
-  }
+  } 
+ 
 }
