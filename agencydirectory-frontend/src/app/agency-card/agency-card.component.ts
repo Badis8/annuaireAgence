@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AgencyCardComponent implements OnInit {
   @Input() agencyDetails: AgencyDetails | undefined;
-  daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
   constructor(private router: Router) {}

@@ -32,8 +32,7 @@ import com.binit.agencymanagement.service.AgencyService;
 public class AgencyRessources {
     @Inject AgencyService agencyService;
 
-    
-
+ 
     @GET
     @Path("/parapID/{id}")
     public  Agency getAgencyById(@PathParam("id") String id) {
@@ -41,10 +40,22 @@ public class AgencyRessources {
         return this.agencyService.getAgencyByID(id);
     }
     @POST
-    @Consumes(MediaType.APPLICATION_JSON) 
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Path("/addAgency") 
-    public void addAgency(AgencyRequest agency){
-        agencyService.addAgency(agency);
+    public void addAgency    (
+        @RestForm("image") @PartType(MediaType.APPLICATION_OCTET_STREAM) FileUpload file,    
+        @RestForm @PartType(MediaType.APPLICATION_JSON)AgencyRequest agency)  throws Exception{ 
+            String fileName = file.fileName();
+            String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
+            String idAgency= agencyService.addAgency(agency);  
+            java.nio.file.Path targetPath = Paths.get("./static", idAgency+"."+fileExtension);
+    
+ 
+      
+        java.nio.file.Path inputStream = file.uploadedFile() ; 
+    Files.copy(inputStream, targetPath, StandardCopyOption.REPLACE_EXISTING); 
+            
+ 
     }
     @GET
     @Path("/listAgencys")
@@ -99,5 +110,5 @@ public class AgencyRessources {
        
         System.out.println("File uploaded to: " + targetPath);
     }
-}
+} 
  

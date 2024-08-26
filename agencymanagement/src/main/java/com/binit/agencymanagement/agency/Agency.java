@@ -21,7 +21,7 @@ public class Agency {
     public Agency() {
     }
 
-    public Agency(Map<String, WorkingHours> workingHours, String zone, String id, Employe manager, String address, String commune, String phoneNumber) {
+    public Agency(Map<String, WorkingHours> workingHours, String zone, String id, Employe manager, String address, String commune, String phoneNumber,List<Employe> employees) {
         this.workingHours = workingHours;
         this.zone = zone;
         this.id = id;
@@ -29,6 +29,7 @@ public class Agency {
         this.address = address;
         this.commune = commune;   
         this.phoneNumber = phoneNumber;   
+        this.employees=employees;
     }
 
     public Map<String, WorkingHours> getWorkingHours() {

@@ -6,7 +6,7 @@ import com.binit.agencymanagement.agency.employe.Employe;
 import com.binit.agencymanagement.dto.AgencyRequest;
 public interface AgencyService {
         
-        public void addAgency(AgencyRequest agency ); 
+        public String addAgency(AgencyRequest agency ); 
 
         public List<Agency> listAgency() ; 
 

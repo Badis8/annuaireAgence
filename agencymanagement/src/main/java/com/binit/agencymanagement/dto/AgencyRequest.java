@@ -1,5 +1,6 @@
 package com.binit.agencymanagement.dto;
 
+import java.util.List;
 import java.util.Map;
 import com.binit.agencymanagement.agency.employe.Employe;
 import com.binit.agencymanagement.agency.utility.WorkingHours;
@@ -15,11 +16,12 @@ public class AgencyRequest {
     private double longitude;
     private String commune;
     private String phoneNumber;   
+    private List<Employe> employees;
 
     public AgencyRequest() {
     }
 
-    public AgencyRequest(String zone, Map<String, WorkingHours> workingHours, String address, Employe manager, String description, double latitude, double longitude, String commune, String phoneNumber) {
+    public AgencyRequest(String zone, Map<String, WorkingHours> workingHours, String address, Employe manager, String description, double latitude, double longitude, String commune, String phoneNumber,List<Employe> employees) {
         this.zone = zone;
         this.workingHours = workingHours;
         this.address = address;
@@ -29,6 +31,7 @@ public class AgencyRequest {
         this.longitude = longitude;
         this.commune = commune;
         this.phoneNumber = phoneNumber;  
+        this.employees=employees;
     }
 
     public String getZone() {
@@ -101,5 +104,16 @@ public class AgencyRequest {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    } 
+
+    
+    public List<Employe> getEmployees() {
+        return employees;
     }
+
+    public void setEmployees(List<Employe> employees) {
+        this.employees = employees;
+    }
+
+  
 }

@@ -25,14 +25,21 @@
         <label for="zone"> zone</label>
         <input id="zone" formControlName="zone" type="text" />
 
-        <label for="coomune">coomune</label>
-        <input id="coomune" formControlName="coomune" type="text"/> 
+        <label for="comune">commune</label>
+        <input id="comune" formControlName="commune" type="text"/> 
 
         <label for="address">address</label>
         <input id="address" formControlName="address" type="text" /> 
         <label for="description">Description</label>
         <textarea id="description" formControlName="description">  </textarea> 
-  
+        <div class="file-upload-wrapper">
+          <label for="image" class="custom-file-upload">
+            <i class="fas fa-cloud-upload-alt"></i> Upload Agency Image
+          </label>
+          <input type="file" id="image" (change)="onFileSelected($event)" />
+          <span class="file-name" *ngIf="selectedFileName">{{ selectedFileName }}</span>
+        </div> 
+    
   
 
 
@@ -53,16 +60,16 @@
                     <td>{{ day }}</td>
                     <td [formGroupName]="'morningSession'"> 
                         <div class="time-input-group">
-                        <input type="time" formControlName="from" required>
+                        <input type="time" formControlName="from"  >
                         <span class="devider">to</span>
-                        <input type="time" formControlName="to" required>
+                        <input type="time" formControlName="to"  >
                         </div>
                     </td>
                     <td [formGroupName]="'eveningSession'"> 
                         <div class="time-input-group">
-                        <input type="time" formControlName="from" required>
+                        <input type="time" formControlName="from"  >
                         <span class="devider">to</span>
-                        <input type="time" formControlName="to" required>
+                        <input type="time" formControlName="to"  >
                         </div>
                     </td>
                 </tr>
@@ -71,9 +78,66 @@
     </div>  
 
     <div *ngIf="currentStep === 2"> 
+      <app-map (dataEvent)="onLocationSelected($event)"></app-map>
+    </div> 
+    
+
+    
+    <div *ngIf="currentStep === 3">  
+
+
+      <label for="fullNameMa">fullName</label>
+      <input id="fullNameMa" formControlName="fullNameMa" type="text" />
+
+      <label for="phone">Phone Number:</label>
+      <input id="phoneM" type="tel" name="phoneM"  formControlName="phoneM"  pattern="[0-9]{10}"   />
+    
+      <label for="emailM">email</label>
+      <input id="emailM" formControlName="emailM" type="text" />
+
      
-     <app-map> </app-map>
+      <label for="jobM">job</label>
+      <input id="jojobMb" formControlName="jobM" type="text" />
+
+    
+
+      </div>
+
+
+
+    <div *ngIf="currentStep === 4">  
+
+
+      <label for="fullName">fullName</label>
+      <input id="fullName" formControlName="fullName" type="text" />
+
+      <label for="phone">Phone Number:</label>
+      <input id="phoneE" type="tel" name="phoneE"  formControlName="phoneE"  pattern="[0-9]{10}"   />
+    
+      <label for="name">email</label>
+      <input id="emailE" formControlName="emailE" type="text" />
+
+     
+      <label for="job">job</label>
+      <input id="job" formControlName="job" type="text" />
+      <input type="file" id="employeeImage" (change)="onEmployeeImageSelected($event)" />
+
+      <button type="button" class="next-button" (click)="addEmployee()">Add Employee</button>
+      <div class="employee-cards-container">
+      <div *ngFor="let employee of employees; let i = index" class="employee-card">
+        <p>{{ employee.fullName }} - {{ employee.job }}</p>
+        <p>{{ employee.phoneNumber }}</p>
+        <p>{{ employee.email }}</p> 
+        <img *ngIf="employee.image" [src]="employee.image" alt="Employee Image" class="employee-image"/>
+        <button type="button" (click)="removeEmployee(i)">X</button>
+      </div>
+
+      </div>
     </div>
+
+
+
+ 
   
       <div class="buttons">
         <button type="button" class="back-button" (click)="previousStep()" [disabled]="currentStep === 0">Back</button>

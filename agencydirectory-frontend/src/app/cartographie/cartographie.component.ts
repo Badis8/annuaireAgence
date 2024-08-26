@@ -29,7 +29,8 @@ export class CartographieComponent implements OnDestroy ,AfterViewInit{
 
   locations: AgencyLocation[] = [];
   
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    
     this.agencyService.agencyFiltered.subscribe((filteredAgencies: AgencyLocation[]) => {
       if (this.map) {
           this.mapPresenter.pinPointMarkers(this.map,filteredAgencies)

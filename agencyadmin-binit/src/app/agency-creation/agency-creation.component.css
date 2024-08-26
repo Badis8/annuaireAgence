@@ -269,5 +269,91 @@ button:disabled {
     margin:10px;
 }
 
+.employee-cards-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping if there are many cards */
+  gap: 15px; /* Space between cards */
+  margin-top: 20px; /* Add top margin */
+}
 
- 
+/* Fixed width for each employee card with improved styling */
+.employee-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 0;  
+  position: relative;
+  width: 220px; /* Slightly wider width for a better appearance */
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px; /* Rounded corners for card */
+  background-color: #f9f9f9; /* Light background color for card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for card */
+  transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+}
+
+.employee-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}
+
+/* Smaller and more styled delete button */
+.employee-card button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #e74c3c;  
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 20%; /* Round button */
+  width: 24px; /* Fixed width for button */
+  height: 24px; /* Fixed height for button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; /* Font size for button text */
+  transition: background-color 0.3s ease;  
+}
+
+.employee-card button:hover {
+  background-color: #c0392b; /* Darker red on hover */
+}
+
+.employee-card p {
+  margin: 0;
+  font-size: 14px; /* Adjust font size inside card */
+  color: #333; /* Darker text color for better readability */
+}
+.file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Style for the custom file upload label */
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 2px solid #007bff;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+/* Hide the default file input */
+input[type="file"] {
+  display: none;
+}
+
+/* Style for the selected file name */
+.file-name {
+  margin-left: 15px;
+  font-size: 14px;
+  color: #333;
+}

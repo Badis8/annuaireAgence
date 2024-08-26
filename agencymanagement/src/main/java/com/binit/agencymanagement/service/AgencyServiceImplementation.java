@@ -18,11 +18,12 @@ public class AgencyServiceImplementation implements AgencyService {
     @Inject AgencyEventProducer AgencyEventProducer;
 
     @Override
-    public void addAgency(AgencyRequest agencyRequest ) {
+    public String addAgency(AgencyRequest agencyRequest ) {
         String randomId = UUID.randomUUID().toString();
-        agencyRepository.add(new Agency(agencyRequest.getWorkingHours(),agencyRequest.getZone(),randomId,agencyRequest.getManager(),agencyRequest.getDescription(),agencyRequest.getCommune(),agencyRequest.getPhoneNumber()));
+        agencyRepository.add(new Agency(agencyRequest.getWorkingHours(),agencyRequest.getZone(),randomId,agencyRequest.getManager(),agencyRequest.getDescription(),agencyRequest.getCommune(),agencyRequest.getPhoneNumber(),agencyRequest.getEmployees()));
   
         AgencyEventProducer.emitAgencyLocationPinPointed(new AgencyLocationPinPointed(randomId,agencyRequest.getLongitude(), agencyRequest.getLatitude()));
+        return randomId;
     }
 
     @Override

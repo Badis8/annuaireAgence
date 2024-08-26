@@ -2,6 +2,7 @@ import { EventEmitter, Injectable, inject } from '@angular/core';
 import { AgencyDetails } from './agency-details';
 import { AgencyLocationManagementService } from './location-management.service'
 import { AgencyLocation } from './agency-location';
+import { AgencyRequest } from './agency-request';
 @Injectable({
   providedIn: 'root'  
 })
@@ -72,6 +73,28 @@ export class AgencyManagementService {
   
     
     this.agencyService.filterAgencyList(this.filteredAgencies);
+  }  
+  async createAgency(formData: FormData, token: String|undefined): Promise<any> {
+    try {
+      const response = await fetch(`${this.url}/addAgency`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      return await response.json();
+    } catch (error: any) {
+      console.error('Failed to create agency:', error.message);
+      throw error;
+    }
   }
- 
 }
+
+  
+ 
