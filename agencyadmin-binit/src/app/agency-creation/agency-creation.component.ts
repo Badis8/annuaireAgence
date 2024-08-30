@@ -25,6 +25,7 @@ export class AgencyCreationComponent {
   formGroup: FormGroup; 
   tokenManger:KeycloackService=inject(KeycloackService);
   employees:Array<Employe>=[];
+  selectedImageManager:File|null=null;
   steps = [
     { label: 'General data' },
     { label: 'schedual' },
@@ -39,7 +40,8 @@ export class AgencyCreationComponent {
 
   location: GeoLocation | null = null;  
   agencyService: AgencyManagementService = inject(AgencyManagementService); 
-
+  selectedEmployeeImage: File | null = null; 
+  employeeImages:Array<File>|null=[];
   constructor(private fb: FormBuilder) {
 
     
@@ -91,9 +93,16 @@ export class AgencyCreationComponent {
         this.selectedImage = file; 
         this.selectedFileName = file.name;
     } 
+  } 
+  onManagerSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+        this.selectedImageManager = file; 
+ 
+    } 
   }
   onSubmit() { 
-    console.log("subimitingOnce Here");
+  
     const defaultAvailability: WorkingHours = {
       morningSession: {
         from: '09:00',  
@@ -105,7 +114,7 @@ export class AgencyCreationComponent {
       }
     };
     if (this.location) {
-      console.log("here");
+
       const agencyRequest: AgencyRequest = {
         zone: this.formGroup.get('zone')?.value,
         workingHours: this.scheduleFormGroup.value,
@@ -129,11 +138,27 @@ export class AgencyCreationComponent {
       const token = this.tokenManger.Token;  
       const formData = new FormData(); 
       if(this.selectedImage != null){ 
-      formData.append('image', this.selectedImage); 
-    }
+      formData.append('image', this.selectedImage);  
+    } 
+
+      
       formData.append('agency', new Blob([JSON.stringify(agencyRequest)], { type: 'application/json' }));
-
-
+ 
+    if (this.selectedImageManager) { 
+      const originalFileName = this.selectedImageManager.name;
+      const fileExtension = originalFileName.substring(originalFileName.lastIndexOf('.'));
+ 
+      const newFileName = `${agencyRequest.manager.employeID}${fileExtension}`;
+      const renamedFile = new File([this.selectedImageManager], newFileName, {
+          type: this.selectedImageManager.type,
+          lastModified: this.selectedImageManager.lastModified,
+      });
+   
+      this.employeeImages?.push(renamedFile);
+    }
+    this.employeeImages?.forEach((file) => {
+      formData.append('employeeImages', file);
+    });
       this.agencyService.createAgency(formData, token)
         .then(() => {
           console.log('Agency created successfully!');
@@ -172,7 +197,7 @@ export class AgencyCreationComponent {
     });
     return controls;
   } 
-  addEmployee() {
+  addEmployee() { 
     const newEmployee:Employe = {
       fullName: this.formGroup.get('fullName')?.value,
       phoneNumber: this.formGroup.get('phoneE')?.value,
@@ -190,14 +215,26 @@ export class AgencyCreationComponent {
         }
       }
     };
-  
-    this.employees.push(newEmployee);
-  
+    
+    if (this.selectedEmployeeImage) { 
+      const originalFileName = this.selectedEmployeeImage.name;
+      const fileExtension = originalFileName.substring(originalFileName.lastIndexOf('.'));
  
+      const newFileName = `${newEmployee.employeID}${fileExtension}`;
+      const renamedFile = new File([this.selectedEmployeeImage], newFileName, {
+          type: this.selectedEmployeeImage.type,
+          lastModified: this.selectedEmployeeImage.lastModified,
+      });
+   
+      this.employeeImages?.push(renamedFile);
+    }
+    this.employees.push(newEmployee);
+    this.selectedEmployeeImage=null;
     this.formGroup.get('fullName')?.reset();
     this.formGroup.get('phoneE')?.reset();
     this.formGroup.get('emailE')?.reset();
     this.formGroup.get('job')?.reset();
+    
   }
   
   removeEmployee(index: number) {
@@ -208,6 +245,11 @@ export class AgencyCreationComponent {
   onLocationSelected(geoLocation: GeoLocation) {
     this.location = geoLocation;  
     console.log('Location selected:', geoLocation);
+  } 
+  onEmployeeImageSelected(event: any) {
+    this.selectedEmployeeImage = event.target.files[0];
+    console.log("here");
   }
+
 }
  

@@ -44,7 +44,8 @@ public class AgencyRessources {
     @Path("/addAgency") 
     public void addAgency    (
         @RestForm("image") @PartType(MediaType.APPLICATION_OCTET_STREAM) FileUpload file,    
-        @RestForm @PartType(MediaType.APPLICATION_JSON)AgencyRequest agency)  throws Exception{ 
+        @RestForm @PartType(MediaType.APPLICATION_JSON)AgencyRequest agency, @RestForm List<FileUpload> employeeImages
+            )  throws Exception{ 
             String fileName = file.fileName();
             String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
             String idAgency= agencyService.addAgency(agency);  
@@ -53,10 +54,21 @@ public class AgencyRessources {
  
       
         java.nio.file.Path inputStream = file.uploadedFile() ; 
-    Files.copy(inputStream, targetPath, StandardCopyOption.REPLACE_EXISTING); 
+    Files.copy(inputStream, targetPath, StandardCopyOption.REPLACE_EXISTING);  
+
+    System.out.println("here");
+    System.out.println(employeeImages.size());
+    for (int i = 0; i < employeeImages.size(); i++) {
+        System.out.println("here");
+        FileUpload employeeImage = employeeImages.get(i);
+        String employeeFileName = employeeImage.fileName();
+        java.nio.file.Path targetPathEmployee = Paths.get("./static/employees",employeeFileName); 
+        Files.copy(employeeImage.uploadedFile(), targetPathEmployee, StandardCopyOption.REPLACE_EXISTING);
+    }
+}
             
  
-    }
+ 
     @GET
     @Path("/listAgencys")
     public List<Agency> listAgency(){

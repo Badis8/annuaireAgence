@@ -99,12 +99,20 @@
       <label for="jobM">job</label>
       <input id="jojobMb" formControlName="jobM" type="text" />
 
-    
+      <div class="file-upload-wrapper">
+        <label for="imaged" class="custom-file-upload">
+          <i class="fas fa-cloud-upload-alt"></i> Upload manafer Image
+        </label>
+        <input type="file" id="imaged" (change)="onManagerSelected($event)" />
+        <span class="file-name" *ngIf="selectedFileName">{{ selectedFileName }}</span>
+      </div> 
+  
+  
 
       </div>
 
 
-
+    
     <div *ngIf="currentStep === 4">  
 
 
@@ -119,8 +127,15 @@
 
      
       <label for="job">job</label>
-      <input id="job" formControlName="job" type="text" />
-      <input type="file" id="employeeImage" (change)="onEmployeeImageSelected($event)" />
+      <input id="job" formControlName="job" type="text" />  
+      <div class="file-upload-wrapper">
+        <label for="imaged" class="custom-file-upload">
+          <i class="fas fa-cloud-upload-alt"></i> Upload emlpoyee Image
+        </label>
+        <input type="file" id="imaged" (change)="onEmployeeImageSelected($event)" />
+        <span class="file-name" *ngIf="selectedFileName">{{ selectedFileName }}</span>
+      </div> 
+  
 
       <button type="button" class="next-button" (click)="addEmployee()">Add Employee</button>
       <div class="employee-cards-container">
@@ -128,7 +143,7 @@
         <p>{{ employee.fullName }} - {{ employee.job }}</p>
         <p>{{ employee.phoneNumber }}</p>
         <p>{{ employee.email }}</p> 
-        <img *ngIf="employee.image" [src]="employee.image" alt="Employee Image" class="employee-image"/>
+ 
         <button type="button" (click)="removeEmployee(i)">X</button>
       </div>
 
