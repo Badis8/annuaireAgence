@@ -10,6 +10,9 @@ public interface AgencyRepository {
     
     public void removeById(String id); 
 
+    public void update(Agency agency);
+
+    public Agency getByID(String id); 
     
 
 }

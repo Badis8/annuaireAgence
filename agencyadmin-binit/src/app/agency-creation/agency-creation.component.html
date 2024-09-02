@@ -16,8 +16,7 @@
   
       
   
-        <label for="name">email</label>
-        <input id="email" formControlName="email" type="text" />
+ 
 
         <label for="phone">Phone Number:</label>
         <input id="phone" type="tel" name="phone"  formControlName="zone"  pattern="[0-9]{10}" required />
@@ -30,8 +29,6 @@
 
         <label for="address">address</label>
         <input id="address" formControlName="address" type="text" /> 
-        <label for="description">Description</label>
-        <textarea id="description" formControlName="description">  </textarea> 
         <div class="file-upload-wrapper">
           <label for="image" class="custom-file-upload">
             <i class="fas fa-cloud-upload-alt"></i> Upload Agency Image
@@ -104,7 +101,7 @@
           <i class="fas fa-cloud-upload-alt"></i> Upload manafer Image
         </label>
         <input type="file" id="imaged" (change)="onManagerSelected($event)" />
-        <span class="file-name" *ngIf="selectedFileName">{{ selectedFileName }}</span>
+        <span class="file-name" *ngIf="selectedFileManagerName">{{ selectedFileManagerName }}</span>
       </div> 
   
   
@@ -133,7 +130,7 @@
           <i class="fas fa-cloud-upload-alt"></i> Upload emlpoyee Image
         </label>
         <input type="file" id="imaged" (change)="onEmployeeImageSelected($event)" />
-        <span class="file-name" *ngIf="selectedFileName">{{ selectedFileName }}</span>
+        <span class="file-name" *ngIf="employeImageName">{{ employeImageName }}</span>
       </div> 
   
 

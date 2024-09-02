@@ -41,5 +41,25 @@ public class AgencyRepositoryImplementation implements AgencyRepository {
     public void removeById(String id) {
         getCollection().deleteOne(Filters.eq("agencyID", id));
     }
-}
+    @Override
+    public void update(Agency agency) {
+        MongoCollection<Agency> collection = getCollection();
+    
+ 
+        collection.replaceOne(
+            Filters.eq("agencyID", agency.getAgencyID()),  
+            agency 
+        );
+  
+    }
+    @Override
+    public Agency getByID(String id) {
+       
+        MongoCollection<Agency> collection = getCollection();
+        
+      
+        return collection.find(Filters.eq("agencyID", id)).first();
+    }
+    }
+ 
 

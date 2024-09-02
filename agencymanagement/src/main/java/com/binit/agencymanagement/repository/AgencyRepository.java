@@ -10,6 +10,9 @@ public interface AgencyRepository {
 
     public void add(Agency agency);
 
+    public void update(Agency agency);
+
+
     public List<Agency> list();
 
     public void removeAll();

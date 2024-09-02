@@ -6,7 +6,6 @@ export interface AgencyRequest {
   workingHours: { [key: string]: WorkingHours };
   address: string;
   manager: Employe;
-  description: string;
   latitude: number;
   longitude: number;
   commune: string;

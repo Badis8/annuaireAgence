@@ -1,0 +1,143 @@
+<div class="header">
+    <h1>edit agency</h1>
+    <p class="description">Please fill out the following details to edit the agency settings.</p>
+  </div>
+<div class="form-container">
+ 
+    <div class="stepper">
+      <div class="step" *ngFor="let step of steps; let i = index" (click)="goToStep(i)" [class.active]="currentStep === i">
+            {{step.label}}
+      </div>
+    </div>
+  
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div *ngIf="currentStep === 0">
+      
+  
+      
+  
+ 
+
+        <label for="phone">Phone Number:</label>
+        <input id="phone" type="tel" name="phone"  formControlName="phone"  pattern="[0-9]{10}" required />
+      
+        <label for="zone"> zone</label>
+        <input id="zone" formControlName="zone" type="text" />
+
+        <label for="comune">commune</label>
+        <input id="comune" formControlName="commune" type="text"/> 
+
+        <label for="address">address</label>
+        <input id="address" formControlName="address" type="text" /> 
+ 
+       
+  
+
+
+ 
+      </div>
+  
+      <div *ngIf="currentStep === 1"> 
+        <table class="schedule-table" *ngIf="scheduleFormGroup" [formGroup]="scheduleFormGroup">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Morning Session</th>
+                    <th>Evening Session</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let day of days" [formGroupName]="day">
+                    <td>{{ day }}</td>
+                    <td [formGroupName]="'morningSession'"> 
+                        <div class="time-input-group">
+                        <input type="time" formControlName="from"  >
+                        <span class="devider">to</span>
+                        <input type="time" formControlName="to"  >
+                        </div>
+                    </td>
+                    <td [formGroupName]="'eveningSession'"> 
+                        <div class="time-input-group">
+                        <input type="time" formControlName="from"  >
+                        <span class="devider">to</span>
+                        <input type="time" formControlName="to"  >
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>  
+
+    <div *ngIf="currentStep === 2"> 
+      <app-map [initialLocation]="AgencyLocation" (dataEvent)="onLocationSelected($event)"></app-map>   
+    </div> 
+    
+
+    
+    <div *ngIf="currentStep === 3">  
+
+
+      <label for="fullNameMa">fullName</label>
+      <input id="fullNameMa" formControlName="fullNameMa" type="text" />
+
+      <label for="phone">Phone Number:</label>
+      <input id="phoneM" type="tel" name="phoneM"  formControlName="phoneM"  pattern="[0-9]{10}"   />
+    
+      <label for="emailM">email</label>
+      <input id="emailM" formControlName="emailM" type="text" />
+
+     
+      <label for="jobM">job</label>
+      <input id="jojobMb" formControlName="jobM" type="text" />
+
+   
+  
+
+      </div>
+
+
+    
+    <div *ngIf="currentStep === 4">  
+
+
+      <label for="fullName">fullName</label>
+      <input id="fullName" formControlName="fullName" type="text" />
+
+      <label for="phone">Phone Number:</label>
+      <input id="phoneE" type="tel" name="phoneE"  formControlName="phoneE"  pattern="[0-9]{10}"   />
+    
+      <label for="name">email</label>
+      <input id="emailE" formControlName="emailE" type="text" />
+
+     
+      <label for="job">job</label>
+      <input id="job" formControlName="job" type="text" />  
+  
+  
+
+      <button type="button" class="next-button" (click)="addEmployee()">Add Employee</button>
+      <div class="employee-cards-container">
+      <div *ngFor="let employee of employees; let i = index" class="employee-card">
+        <p>{{ employee.fullName }} - {{ employee.job }}</p>
+        <p>{{ employee.phoneNumber }}</p>
+        <p>{{ employee.email }}</p> 
+ 
+        <button type="button" (click)="removeEmployee(i)">X</button>
+      </div>
+
+      </div>
+    </div>
+
+
+
+ 
+  
+      <div class="buttons">
+        <button type="button" class="back-button" (click)="previousStep()" [disabled]="currentStep === 0">Back</button>
+        <button type="button" class="next-button" (click)="nextStep()" *ngIf="currentStep < steps.length - 1">Next</button>
+        <button type="submit" class="submit-button" *ngIf="currentStep === steps.length - 1">edit</button>
+      </div>
+    </form>
+ 
+  </div>
+  

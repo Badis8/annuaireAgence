@@ -6,5 +6,7 @@ public interface AgencyEventProducer {
 
     public void emitAgencyLocationPinPointed(AgencyLocationPinPointed agencyLocationPinPointed);
     
-    public void emitAgencyDeleted(String id);
+    public void emitAgencyDeleted(String id); 
+
+    public void emitAgencyUpdated(AgencyLocationPinPointed agencyLocationPinPointed) ;
 } 

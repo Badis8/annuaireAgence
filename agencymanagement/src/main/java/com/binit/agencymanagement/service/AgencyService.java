@@ -18,6 +18,8 @@ public interface AgencyService {
 
         public Agency getAgencyByID(String idAgency);
 
-        public void deleteAgency(String idAgency);
+        public void deleteAgency(String idAgency); 
+        
+        public void update(AgencyRequest agency,String Id );
 
 }

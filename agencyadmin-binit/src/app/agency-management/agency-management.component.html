@@ -17,15 +17,15 @@
                   <label for="employee">Employee:</label>
                   <input id="employee" type="text" formControlName="employee" />
                 </div>
-              
+                
+
                 <div class="input-group">
                   <label for="zone">Zone:</label>
-                  <select id="zone" formControlName="zone">
-                    <option value="">Select Zone</option>
-                    <option value="Option1">Option 1</option>
-                    <option value="Option2">Option 2</option>
-                  </select>
+                  <input id="zone" type="text" formControlName="zone" />
                 </div>
+              
+
+            
               
                 <button class="search-btn" type="submit">Search</button>
                 <button class="create-agency-btn" (click)="goToCreateAgency()">Create Agency</button>
@@ -56,7 +56,8 @@
                         <td>{{ agency.commune }}</td>
                         <td>{{ agency.zone }}</td>
                         <td>{{ agency.employees.length +1 }}</td>
-                        <td><i class="fas fa-edit"></i></td>
+                        <td><i class="fas fa-edit" (click)="editAgency(agency.id)"></i></td>
+
                        <td>  <i class="fas fa-trash" (click)="onDeleteAgency(agency.id)"></i> </td>
                     </tr>
                 </tbody>

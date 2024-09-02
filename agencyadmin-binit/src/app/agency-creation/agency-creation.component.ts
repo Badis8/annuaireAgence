@@ -22,6 +22,8 @@ import { KeycloackService } from '../keycloack.service';
 export class AgencyCreationComponent { 
   selectedImage: File | null = null;
   selectedFileName: string | undefined;
+  employeImageName:string|undefined;
+  selectedFileManagerName:string | undefined;
   formGroup: FormGroup; 
   tokenManger:KeycloackService=inject(KeycloackService);
   employees:Array<Employe>=[];
@@ -51,10 +53,9 @@ export class AgencyCreationComponent {
    this.days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     this.formGroup = this.fb.group({
-      email: [''],
+ 
       zone: [''],
       commune: [''],
-      description: [''],
       address: [''],
       phoneE: [''],
       emailE: [''],
@@ -98,6 +99,7 @@ export class AgencyCreationComponent {
     const file: File = event.target.files[0];
     if (file) {
         this.selectedImageManager = file; 
+        this.selectedFileManagerName=file.name;
  
     } 
   }
@@ -127,7 +129,6 @@ export class AgencyCreationComponent {
           employeID: uuidv4(),
           availability: defaultAvailability
         },
-        description: this.formGroup.get('description')?.value,
         latitude: this.location.latitude,
         longitude: this.location.longitude,
         commune: this.formGroup.get('commune')?.value, 
@@ -178,7 +179,8 @@ export class AgencyCreationComponent {
         }
       });
   
-    }
+    } 
+ 
   }
   initializeSchedule(): { [key: string]: FormGroup } {
     const controls: { [key: string]: FormGroup } = {};
@@ -248,7 +250,7 @@ export class AgencyCreationComponent {
   } 
   onEmployeeImageSelected(event: any) {
     this.selectedEmployeeImage = event.target.files[0];
-    console.log("here");
+   this.employeImageName=this.selectedEmployeeImage?.name;
   }
 
 }

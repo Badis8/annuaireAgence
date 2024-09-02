@@ -1,0 +1,359 @@
+.form-container {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+  }
+  
+  .step { 
+    height: 30px;  
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #000; /* Default color black */
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .step-number {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-weight: bold; /* Bolder font for step number */
+  }
+  
+  .step.active {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px; /* Make the active step label larger */
+    height : 35px; /* Make the active step slightly larger */
+}
+  
+  form {
+    width: 75%;
+    padding-left: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  input[type="text"],
+  textarea,
+  select {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px; /* Improve font size */
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif; /* Improved button font */
+  }
+  
+  .back-button {
+    background-color: #ccc;
+    color: #fff;
+  }
+  
+  .next-button, .submit-button {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .toggle-label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  input[type="tel"]
+   {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px; /* Improve font size */
+    font-family: 'Roboto', sans-serif;
+ 
+  }
+  
+.stepper {
+    width: 15%;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 20px;
+    border-right: 2px solid #ddd; 
+ 
+    margin-right: 20px;
+    padding-right: 10px; /* Decrease padding if necessary */
+    border-right: 2px solid #ddd;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.step {
+    padding: 8px 12px;  
+    margin-bottom: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #555;
+    background-color: #f7f7f7;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.step:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+.step.active {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
+.step-number {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+.step.active {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
+input[type="text"], input[type="tel"], textarea, select {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:hover, input[type="tel"]:hover, textarea:hover, select:hover {
+    border-color: #007bff;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+button {
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button {
+    background-color: #ccc;
+    color: #ffffff;
+}
+
+.next-button, .submit-button {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.back-button:hover {
+    background-color: #aaa;
+}
+
+.next-button:hover, .submit-button:hover {
+    background-color: #0056b3;
+}
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.schedule-table th, .schedule-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.schedule-table thead {
+    background-color: #f7f7f7;
+}
+
+.schedule-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.schedule-table input[type="time"] {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.schedule-table .time-input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin:5px;
+}
+
+.devider{
+    margin:10px;
+}
+
+.employee-cards-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping if there are many cards */
+  gap: 15px; /* Space between cards */
+  margin-top: 20px; /* Add top margin */
+}
+
+/* Fixed width for each employee card with improved styling */
+.employee-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 0;  
+  position: relative;
+  width: 220px; /* Slightly wider width for a better appearance */
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px; /* Rounded corners for card */
+  background-color: #f9f9f9; /* Light background color for card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for card */
+  transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+}
+
+.employee-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}
+
+/* Smaller and more styled delete button */
+.employee-card button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #e74c3c;  
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 20%; /* Round button */
+  width: 24px; /* Fixed width for button */
+  height: 24px; /* Fixed height for button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; /* Font size for button text */
+  transition: background-color 0.3s ease;  
+}
+
+.employee-card button:hover {
+  background-color: #c0392b; /* Darker red on hover */
+}
+
+.employee-card p {
+  margin: 0;
+  font-size: 14px; /* Adjust font size inside card */
+  color: #333; /* Darker text color for better readability */
+}
+.file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Style for the custom file upload label */
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 2px solid #007bff;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+/* Hide the default file input */
+input[type="file"] {
+  display: none;
+}
+
+/* Style for the selected file name */
+.file-name {
+  margin-left: 15px;
+  font-size: 14px;
+  color: #333;
+}

@@ -13,6 +13,10 @@ public class AgencyEventProducerImplementation implements  AgencyEventProducer  
 
     @Channel("agencyDeleted")
     Emitter< String> agencyDeleterEmitter;
+
+
+    @Channel("agencyUpdated")
+    Emitter< AgencyLocationPinPointed> agencyUpdatedEmitter; 
     @Override
     public void emitAgencyLocationPinPointed(AgencyLocationPinPointed agencyLocationPinPointed) {
         agencyPinPointedEmitter.send( agencyLocationPinPointed);
@@ -26,4 +30,11 @@ public class AgencyEventProducerImplementation implements  AgencyEventProducer  
         agencyDeleterEmitter.send(id);
     }
 
+
+ 
+ 
+    @Override
+    public void emitAgencyUpdated(AgencyLocationPinPointed agencyLocationPinPointed) {
+        agencyUpdatedEmitter.send(agencyLocationPinPointed);
+    }
 }

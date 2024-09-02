@@ -11,7 +11,7 @@ public class AgencyRequest {
     private Map<String, WorkingHours> workingHours;
     private String address;
     private Employe manager;
-    private String description;
+ 
     private double latitude;
     private double longitude;
     private String commune;
@@ -21,12 +21,12 @@ public class AgencyRequest {
     public AgencyRequest() {
     }
 
-    public AgencyRequest(String zone, Map<String, WorkingHours> workingHours, String address, Employe manager, String description, double latitude, double longitude, String commune, String phoneNumber,List<Employe> employees) {
+    public AgencyRequest(String zone, Map<String, WorkingHours> workingHours, String address, Employe manager,double latitude, double longitude, String commune, String phoneNumber,List<Employe> employees) {
         this.zone = zone;
         this.workingHours = workingHours;
         this.address = address;
         this.manager = manager;
-        this.description = description;
+ 
         this.latitude = latitude;
         this.longitude = longitude;
         this.commune = commune;
@@ -58,13 +58,7 @@ public class AgencyRequest {
         this.address = address;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+ 
 
     public Employe getManager() {
         return manager;

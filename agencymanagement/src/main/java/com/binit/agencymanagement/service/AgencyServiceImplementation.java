@@ -20,7 +20,7 @@ public class AgencyServiceImplementation implements AgencyService {
     @Override
     public String addAgency(AgencyRequest agencyRequest ) {
         String randomId = UUID.randomUUID().toString();
-        agencyRepository.add(new Agency(agencyRequest.getWorkingHours(),agencyRequest.getZone(),randomId,agencyRequest.getManager(),agencyRequest.getDescription(),agencyRequest.getCommune(),agencyRequest.getPhoneNumber(),agencyRequest.getEmployees()));
+        agencyRepository.add(new Agency(agencyRequest.getWorkingHours(),agencyRequest.getZone(),randomId,agencyRequest.getManager(),agencyRequest.getAddress(),agencyRequest.getCommune(),agencyRequest.getPhoneNumber(),agencyRequest.getEmployees()));
   
         AgencyEventProducer.emitAgencyLocationPinPointed(new AgencyLocationPinPointed(randomId,agencyRequest.getLongitude(), agencyRequest.getLatitude()));
         return randomId;
@@ -55,6 +55,13 @@ public class AgencyServiceImplementation implements AgencyService {
     public void deleteAgency(String idAgency) {
       this.agencyRepository.removeById(idAgency); 
       this.AgencyEventProducer.emitAgencyDeleted(idAgency);
+    }
+
+    @Override
+    public void update(AgencyRequest agencyRequest, String id) {
+        Agency agency=new Agency(agencyRequest.getWorkingHours(),agencyRequest.getZone(),id,agencyRequest.getManager(),agencyRequest.getAddress(),agencyRequest.getCommune(),agencyRequest.getPhoneNumber(),agencyRequest.getEmployees());
+       this.agencyRepository.update(agency);
+       AgencyEventProducer.emitAgencyUpdated(new AgencyLocationPinPointed(id,agencyRequest.getLongitude(), agencyRequest.getLatitude()));
     }
     
 }

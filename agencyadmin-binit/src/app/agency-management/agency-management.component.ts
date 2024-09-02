@@ -31,6 +31,12 @@ export class AgencyManagementComponent {
   }
   goToCreateAgency() {
     this.router.navigate(['/create-agency']); 
+  } 
+  editAgency(agencyId: string) {
+    console.log("Navigating to edit agency");
+    this.router.navigate(['/edit-agency', agencyId])
+      .then(() => console.log('Navigation successful'))
+      .catch(err => console.error('Navigation error:', err));
   }
   onDeleteAgency(id: string): void {
     this.agencyService.deleteRemoteAgencyById(id,this.tokenManger.Token).then(() => {

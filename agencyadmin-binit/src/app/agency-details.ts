@@ -9,6 +9,7 @@ export interface AgencyDetails {
     employees: Employe[];
     commune: string;
     phoneNumber:string;
+    
 
 }
   

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, Output, EventEmitter, OnChanges, SimpleChanges, Input } from '@angular/core';
 import * as L from 'leaflet';
 import { GeoLocation } from '../geo-location';
 import { Marker, icon } from 'leaflet';
@@ -10,15 +10,16 @@ import { Marker, icon } from 'leaflet';
 })
 export class MapComponent implements AfterViewInit {
   private map:any; 
-  private marker: L.Marker | undefined;
+  private marker: L.Marker | undefined;  
+  @Input() initialLocation: GeoLocation | null|undefined = null;
   @Output() dataEvent = new EventEmitter<GeoLocation>();
   private initMap(): void {
     this.map = L.map('map', {
       center: [ 39.8282, -98.5795 ],
-      zoom: 3
+      zoom: 10
     });
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {  
       maxZoom: 18,
       minZoom: 3,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -42,12 +43,29 @@ export class MapComponent implements AfterViewInit {
   }
 
   constructor() { }
+ 
+
+  initializeMap(location?: GeoLocation): void {
+    if (location) {
+      const { latitude, longitude } = location;
+      this.marker = L.marker([latitude, longitude]).addTo(this.map);
+      this.map.setView([latitude, longitude], 15); 
+
+    }
+    }
+    
+ 
 
   ngAfterViewInit(): void {
     this.initMap();
     this.map.on('click', (event: L.LeafletMouseEvent) => {
       this.handleMapClick(event);
     });
+    if (this.initialLocation) {
+      this.initializeMap(this.initialLocation);
+      this.dataEvent.emit(this.initialLocation);
+       
+    }
  
   } 
   

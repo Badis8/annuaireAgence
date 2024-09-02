@@ -94,6 +94,49 @@ export class AgencyManagementService {
       throw error;
     }
   }
+  async getAgencyById(id: String, token: String | undefined): Promise<AgencyDetails | null> {
+    try {
+      const response = await fetch(`${this.url}/parapID/${id}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+  
+      const agency = await response.json();
+      return agency as AgencyDetails;
+    } catch (error: any) {
+      console.error(`Failed to fetch agency with ID ${id}:`, error.message);
+      return null;
+    }
+  } 
+
+
+  async updateAgency(id: string|undefined, formData: FormData, token: String | undefined): Promise<any> {
+    try {
+      const response = await fetch(`${this.url}/updateAgency/${id}`, {
+        method: 'PUT',
+        body: formData,
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+  
+      return await response.json();
+    } catch (error: any) {
+      console.error('Failed to update agency:', error.message);
+      throw error;
+    }
+  }
 }
 
   

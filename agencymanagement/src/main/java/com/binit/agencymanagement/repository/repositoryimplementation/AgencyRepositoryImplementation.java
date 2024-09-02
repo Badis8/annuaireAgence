@@ -71,5 +71,10 @@ public class AgencyRepositoryImplementation implements AgencyRepository {
         }
         return agency;
     }
+    @Override
+    public void update(Agency agency) {
+        MongoCollection<Agency> collection = getCollection();
+        collection.replaceOne(Filters.eq("id", agency.getId()), agency);
+    }
     
 }
