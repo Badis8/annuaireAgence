@@ -17,7 +17,7 @@ export class AgencyCardComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    console.log(this.agencyDetails);
+    
   }
   getOpeningHours(day: string, session: string): string {
  

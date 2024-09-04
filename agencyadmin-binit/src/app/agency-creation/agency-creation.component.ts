@@ -57,6 +57,7 @@ export class AgencyCreationComponent {
       zone: [''],
       commune: [''],
       address: [''],
+      phone:[''],
       phoneE: [''],
       emailE: [''],
       job: [''],
@@ -132,7 +133,7 @@ export class AgencyCreationComponent {
         latitude: this.location.latitude,
         longitude: this.location.longitude,
         commune: this.formGroup.get('commune')?.value, 
-        phoneNumber: this.formGroup.get('phoneE')?.value,
+        phoneNumber: this.formGroup.get('phone')?.value,
         employees: this.employees
       };
 

@@ -19,10 +19,11 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
+import java.nio.file.StandardOpenOption;
 
 import com.binit.agencymanagement.agency.Agency;
 import com.binit.agencymanagement.dto.AddEmployeRequest;
@@ -30,9 +31,13 @@ import com.binit.agencymanagement.dto.AgencyRequest;
 import com.binit.agencymanagement.service.AgencyService;
 import com.binit.agencymanagement.service.PathConverter;
 import com.binit.agencymanagement.service.clientDjango;
-
-import io.vertx.mutiny.core.buffer.Buffer;
-
+import okhttp3.*;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+ 
+import io.smallrye.mutiny.Uni;
 
 
 @Path("/agency")
@@ -40,8 +45,9 @@ public class AgencyRessources {
     @Inject AgencyService agencyService;
     @Inject
     @RestClient
-    clientDjango pythonService;
- 
+    clientDjango djangoClientervice;
+    
+    OkHttpClient client = new OkHttpClient();
     @GET
     @Path("/parapID/{id}")
     public  Agency getAgencyById(@PathParam("id") String id) {
@@ -65,18 +71,49 @@ public class AgencyRessources {
       
         java.nio.file.Path inputStream = file.uploadedFile() ; 
     Files.copy(inputStream, targetPath, StandardCopyOption.REPLACE_EXISTING);  
-    File newFile = PathConverter.createFileFromPath(targetPath,fileName);
-   this.pythonService.sendImage(newFile, FinalName).await().indefinitely();
  
     for (int i = 0; i < employeeImages.size(); i++) {
-        System.out.println("here");
+    
         FileUpload employeeImage = employeeImages.get(i);
         String employeeFileName = employeeImage.fileName();
-        java.nio.file.Path targetPathEmployee = Paths.get("./static/employees",employeeFileName); 
+        java.nio.file.Path targetPathEmployee = Paths.get("./static/employees","employeeFileName"); 
+        System.out.println(employeeFileName);
+        String employeeFileNameWithoutExtension = employeeFileName.contains(".") 
+        ? employeeFileName.substring(0, employeeFileName.lastIndexOf(".")) 
+        : employeeFileName;
+
         Files.copy(employeeImage.uploadedFile(), targetPathEmployee, StandardCopyOption.REPLACE_EXISTING);
+        File imageFile = targetPathEmployee.toFile();
+ 
+        okhttp3.MediaType mediaType = okhttp3.MediaType.get("image/png");
+            MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+            multipartBuilder.addFormDataPart("image", employeeFileName, RequestBody.create(imageFile, mediaType));
+            multipartBuilder.addFormDataPart("filename", employeeFileNameWithoutExtension);
+
+            RequestBody requestBody = multipartBuilder.build();
+
+            Request request = new Request.Builder()
+                    .url("http://localhost:8000/api/transform/")
+                    .post(requestBody)
+                    .build();
+
+            try (okhttp3.Response response = this.client.newCall(request).execute()) {
+                if (response.isSuccessful()) {
+                    System.out.println("Image uploaded successfully: " + response.body().string());
+                } else {
+                    System.out.println("Failed to upload image: " + response.code() + " " + response.message());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
-}
-         
+
+
+  
+      
+    
+       
  
     @PUT
     @Path("/updateAgency/{id}")
@@ -84,7 +121,7 @@ public class AgencyRessources {
     public void updateAgency(
         @PathParam("id") String id,
         @RestForm @PartType(MediaType.APPLICATION_JSON) AgencyRequest agencyRequest){
- 
+            System.out.println(agencyRequest.getPhoneNumber());
            this.agencyService.update(agencyRequest, id);
         }
     @GET
@@ -141,18 +178,22 @@ public class AgencyRessources {
         System.out.println("File uploaded to: " + targetPath);
     } 
 
-
     @POST
     @Path("/saveImage")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public void saveImage(@RestForm("image") @PartType(MediaType.APPLICATION_OCTET_STREAM) FileUpload file) throws Exception
-        {
-
+    public void saveImage(@RestForm("image") @PartType(MediaType.APPLICATION_OCTET_STREAM) FileUpload file) throws Exception {
+        
+    
         String fileName = file.fileName();
-        java.nio.file.Path targetPath = Paths.get("./static",fileName);
+    
+ 
+        java.nio.file.Path targetPath = Paths.get("./static/employees", fileName);
+    
+        
         java.nio.file.Path inputStream = file.uploadedFile() ; 
-        Files.copy(inputStream, targetPath, StandardCopyOption.REPLACE_EXISTING);  
-
+   
+ 
+        Files.copy(inputStream, targetPath, StandardCopyOption.REPLACE_EXISTING);
     }
 } 
  

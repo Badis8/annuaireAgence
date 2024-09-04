@@ -148,6 +148,7 @@ export class ModofyAgencyComponent implements OnInit{
         employees: this.employees
       };
 
+      console.log(agencyRequest)
       const token = this.tokenManger.Token;  
       const formData = new FormData(); 
    
@@ -155,8 +156,7 @@ export class ModofyAgencyComponent implements OnInit{
       
       formData.append('agencyRequest', new Blob([JSON.stringify(agencyRequest)], { type: 'application/json' }));
       this.agencyService.updateAgency(this.agencyDetails?.id,formData, token);
-      window.location.href = '/agencyManagement';
-
+ 
  
  
   
